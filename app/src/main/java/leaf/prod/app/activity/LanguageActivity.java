@@ -31,6 +31,12 @@ public class LanguageActivity extends BaseActivity {
     @BindView(R.id.ll_chinese)
     LinearLayout llChinese;
 
+    @BindView(R.id.iv_chinese_traditional_check)
+    ImageView ivChineseTranditionalCheck;
+
+    @BindView(R.id.ll_chinese_traditional)
+    LinearLayout ll_chinese_traditional;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_language);
@@ -53,16 +59,24 @@ public class LanguageActivity extends BaseActivity {
         if ((int) SPUtils.get(this, "language", 0) == 1) {
             ivEnglishCheck.setVisibility(View.VISIBLE);
             ivChineseCheck.setVisibility(View.GONE);
+            ivChineseTranditionalCheck.setVisibility(View.GONE);
         } else if ((int) SPUtils.get(this, "language", 0) == 2) {
             ivEnglishCheck.setVisibility(View.GONE);
             ivChineseCheck.setVisibility(View.VISIBLE);
+            ivChineseTranditionalCheck.setVisibility(View.GONE);
+        } else if ((int) SPUtils.get(this, "language", 0) == 3) {
+            ivEnglishCheck.setVisibility(View.GONE);
+            ivChineseCheck.setVisibility(View.GONE);
+            ivChineseTranditionalCheck.setVisibility(View.VISIBLE);
         } else {
             if (LanguageUtil.getLanguage(this) == Language.en_US) {
                 ivEnglishCheck.setVisibility(View.VISIBLE);
                 ivChineseCheck.setVisibility(View.GONE);
+                ivChineseTranditionalCheck.setVisibility(View.GONE);
             } else {
                 ivEnglishCheck.setVisibility(View.GONE);
                 ivChineseCheck.setVisibility(View.VISIBLE);
+                ivChineseTranditionalCheck.setVisibility(View.GONE);
             }
         }
     }
@@ -71,13 +85,14 @@ public class LanguageActivity extends BaseActivity {
     public void initData() {
     }
 
-    @OnClick({R.id.ll_english, R.id.ll_chinese})
+    @OnClick({R.id.ll_english, R.id.ll_chinese, R.id.ll_chinese_traditional})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_english:
                 SPUtils.put(this, "isRecreate", true);//通知mainactivity更改语言设置标志
                 ivEnglishCheck.setVisibility(View.VISIBLE);
                 ivChineseCheck.setVisibility(View.GONE);
+                ivChineseTranditionalCheck.setVisibility(View.GONE);
                 /**
                  * 显示英文
                  * */
@@ -88,8 +103,18 @@ public class LanguageActivity extends BaseActivity {
                 SPUtils.put(this, "isRecreate", true);//mainactivity更改语言设置标志
                 ivEnglishCheck.setVisibility(View.GONE);
                 ivChineseCheck.setVisibility(View.VISIBLE);
+                ivChineseTranditionalCheck.setVisibility(View.GONE);
                 //显示中文
                 LanguageUtil.changeLanguage(this, Language.zh_CN);
+                recreate();
+                break;
+            case R.id.ll_chinese_traditional:
+                SPUtils.put(this, "isRecreate", true);//mainactivity更改语言设置标志
+                ivEnglishCheck.setVisibility(View.GONE);
+                ivChineseCheck.setVisibility(View.GONE);
+                ivChineseTranditionalCheck.setVisibility(View.VISIBLE);
+                //显示中文
+                LanguageUtil.changeLanguage(this, Language.zh_Hant);
                 recreate();
                 break;
         }

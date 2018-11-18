@@ -23,6 +23,11 @@ public class LanguageUtil {
                 SPUtils.put(context, "language", 2);
                 ThirdLoginUtil.updateLocal(context, Language.zh_CN, null);
                 break;
+            case zh_Hant:
+                configuration.locale = Locale.TRADITIONAL_CHINESE;
+                SPUtils.put(context, "language", 3);
+                ThirdLoginUtil.updateLocal(context, Language.zh_Hant, null);
+                break;
             case en_US:
                 configuration.locale = Locale.US;
                 SPUtils.put(context, "language", 1);
@@ -37,9 +42,11 @@ public class LanguageUtil {
      */
     public static Language getLanguage(Context context) {
         Locale locale = context.getResources().getConfiguration().locale;
-        String language = locale.getLanguage();
-        if (language.contains("en")) {
+        String languageDisplayName = locale.getDisplayName();
+        if (languageDisplayName.contains("English")) {
             return Language.en_US;
+        } else if (languageDisplayName.contains("Taiwan")) {
+            return Language.zh_Hant;
         } else {
             return Language.zh_CN;
         }
@@ -54,6 +61,8 @@ public class LanguageUtil {
                 return Language.en_US;
             case 2:
                 return Language.zh_CN;
+            case 3:
+                return Language.zh_Hant;
             default:
                 return getLanguage(context);
         }
