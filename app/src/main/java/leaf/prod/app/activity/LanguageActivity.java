@@ -73,6 +73,10 @@ public class LanguageActivity extends BaseActivity {
                 ivEnglishCheck.setVisibility(View.VISIBLE);
                 ivChineseCheck.setVisibility(View.GONE);
                 ivChineseTranditionalCheck.setVisibility(View.GONE);
+            } else if (LanguageUtil.getLanguage(this) == Language.zh_Hant) {
+                ivEnglishCheck.setVisibility(View.GONE);
+                ivChineseCheck.setVisibility(View.GONE);
+                ivChineseTranditionalCheck.setVisibility(View.VISIBLE);
             } else {
                 ivEnglishCheck.setVisibility(View.GONE);
                 ivChineseCheck.setVisibility(View.VISIBLE);
