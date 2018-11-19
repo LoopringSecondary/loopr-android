@@ -124,8 +124,8 @@ public class SendActivity extends BaseActivity {
     @BindView(R.id.seekBar)
     BubbleSeekBar seekBar;
 
-    @BindView(R.id.transacition_fee)
-    TextView transacitionFee;
+    @BindView(R.id.transaction_fee)
+    TextView transactionFee;
 
     @BindView(R.id.btn_send)
     Button btnSend;
@@ -362,7 +362,7 @@ public class SendActivity extends BaseActivity {
         payAmount.setText(moneyAmount.getText().toString() + " " + sendChoose);
         toAddress.setText(walletAddress.getText().toString());
         formAddress.setText(address);
-        tvGassFee.setText(transacitionFee.getText());
+        tvGassFee.setText(transactionFee.getText());
         confirmDialog.show();
     }
 
@@ -528,11 +528,11 @@ public class SendActivity extends BaseActivity {
             feeDialog = builder.create();
             feeDialog.setCancelable(true);
             feeDialog.setCanceledOnTouchOutside(true);
-            feeDialog.setOnDismissListener(dialogInterface -> transacitionFee.setText(tvAmount.getText()));
+            feeDialog.setOnDismissListener(dialogInterface -> transactionFee.setText(tvAmount.getText()));
             Objects.requireNonNull(feeDialog.getWindow()).setGravity(Gravity.BOTTOM);
         }
         gasSeekBar.setProgress((float) gasDataManager.getGasPriceInGwei());
-        tvAmount.setText(transacitionFee.getText());
+        tvAmount.setText(transactionFee.getText());
         tvWalletInfo.setText(new StringBuilder("Gas limit(").append(gasDataManager.getGasLimitByType(gasLimitType))
                 .append(") * Gas Price(")
                 .append((int) gasDataManager.getGasPriceInGwei())
@@ -572,7 +572,7 @@ public class SendActivity extends BaseActivity {
             DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
             df.setMaximumFractionDigits(10);
 
-            transacitionFee.setText(new StringBuilder(df.format(gasEthValue)).append(" ETH ≈ ")
+            transactionFee.setText(new StringBuilder(df.format(gasEthValue)).append(" ETH ≈ ")
                     .append(CurrencyUtil.format(this, gasEthValue * marketcapDataManager.getPriceBySymbol("ETH"))));
         }, error -> Log.e("Send", error.getMessage()));
     }

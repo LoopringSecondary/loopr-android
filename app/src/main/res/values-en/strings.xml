@@ -91,7 +91,7 @@
     <string name="input_valid_amount">Please input a valid amount</string>
     <string name="available_balance">Available balance %s</string>
     <string name="insufficient_balance">insufficient balance</string>
-    <string name="transaction_fee">Transacition Fee</string>
+    <string name="transaction_fee">Transaction Fee</string>
     <string name="dialog_fee_title">Set Gas</string>
     <string name="dialog_fee_recom">Recommend Price</string>
     <string name="gas_limit">Gas Limit</string>

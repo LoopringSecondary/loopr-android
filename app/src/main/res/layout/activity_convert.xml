@@ -248,7 +248,7 @@
                 android:textSize="@dimen/normal14Text"/>
 
             <TextView
-                android:id="@+id/transacition_fee"
+                android:id="@+id/transaction_fee"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"

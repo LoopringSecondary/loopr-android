@@ -70,8 +70,8 @@ public class ConvertPresenter extends BasePresenter<ConvertActivity> {
     @BindView(R.id.second_token_tx)
     TextView secondTokenTx;
 
-    @BindView(R.id.transacition_fee)
-    TextView transacitionFee;
+    @BindView(R.id.transaction_fee)
+    TextView transactionFee;
 
     @BindView(R.id.hint_text)
     TextView hint;
@@ -200,11 +200,11 @@ public class ConvertPresenter extends BasePresenter<ConvertActivity> {
             feeDialog = builder.create();
             feeDialog.setCancelable(true);
             feeDialog.setCanceledOnTouchOutside(true);
-            feeDialog.setOnDismissListener(dialogInterface -> transacitionFee.setText(tvAmount.getText()));
+            feeDialog.setOnDismissListener(dialogInterface -> transactionFee.setText(tvAmount.getText()));
             Objects.requireNonNull(feeDialog.getWindow()).setGravity(Gravity.BOTTOM);
         }
         gasSeekBar.setProgress((float) gasDataManager.getGasPriceInGwei());
-        tvAmount.setText(transacitionFee.getText());
+        tvAmount.setText(transactionFee.getText());
         tvWalletInfo.setText(new StringBuilder("Gas limit(").append(gasDataManager.getGasLimitByType("token_transfer"))
                 .append(") * Gas Price(")
                 .append((int) gasDataManager.getGasPriceInGwei())
