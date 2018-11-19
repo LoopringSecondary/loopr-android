@@ -3,6 +3,9 @@ package leaf.prod.app.activity;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
 import android.annotation.SuppressLint;
@@ -564,7 +567,12 @@ public class SendActivity extends BaseActivity {
             }
             gasEthValue = Double.parseDouble(gasDataManager.getGasAmountInETH(gasDataManager.getGasLimitByType(gasLimitType)
                     .toString(), gasDataManager.getGasPriceString()));
-            transacitionFee.setText(new StringBuilder(gasEthValue.toString()).append(" ETH ≈ ")
+
+            // Avoid scientific notation
+            DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+            df.setMaximumFractionDigits(10);
+
+            transacitionFee.setText(new StringBuilder(df.format(gasEthValue)).append(" ETH ≈ ")
                     .append(CurrencyUtil.format(this, gasEthValue * marketcapDataManager.getPriceBySymbol("ETH"))));
         }, error -> Log.e("Send", error.getMessage()));
     }
