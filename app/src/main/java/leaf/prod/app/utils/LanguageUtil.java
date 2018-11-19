@@ -43,6 +43,7 @@ public class LanguageUtil {
     public static Language getLanguage(Context context) {
         Locale locale = context.getResources().getConfiguration().locale;
         String languageDisplayName = locale.getDisplayName();
+        // languageDisplayName contains region information.
         if (languageDisplayName.contains("English")) {
             return Language.en_US;
         } else if (languageDisplayName.contains("Taiwan")) {
