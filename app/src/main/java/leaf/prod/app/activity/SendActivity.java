@@ -144,6 +144,8 @@ public class SendActivity extends BaseActivity {
 
     private String sendChoose;
 
+    private String gasLimitType = "token_transfer";
+
     private LoopringService loopringService = new LoopringService();
 
     private BalanceDataManager balanceManager;
@@ -266,14 +268,7 @@ public class SendActivity extends BaseActivity {
     public void initData() {
         updateBySymbol(null);
         address = WalletUtil.getCurrentAddress(this);
-        gasDataManager.getGasObservable().subscribe(gasPrice -> {
-            LyqbLogger.log("gas: " + gasPrice);
-            gasDataManager.setRecommendGasPrice(gasPrice);
-            gasEthValue = Double.parseDouble(gasDataManager.getGasAmountInETH(gasDataManager.getGasLimitByType("token_transfer")
-                    .toString(), gasDataManager.getGasPriceString()));
-            transacitionFee.setText(new StringBuilder(gasEthValue.toString()).append(" ETH ≈ ")
-                    .append(CurrencyUtil.format(this, gasEthValue * marketcapDataManager.getPriceBySymbol("ETH"))));
-        }, error -> Log.e("Send", error.getMessage()));
+        updateTransactionFeeUI();
         shakeAnimation = AnimationUtils.loadAnimation(SendActivity.this, R.anim.shake_x);
     }
 
@@ -395,8 +390,8 @@ public class SendActivity extends BaseActivity {
         showProgress(getResources().getString(R.string.loading_default_messsage));
         new Thread(() -> {
             try {
-                if ((gasFee = gasDataManager.getGasAmountInETH("token_transfer")) > balanceManager.getAssetBySymbol("ETH")
-                        .getValue()) {
+                gasFee = gasDataManager.getGasAmountInETH(gasLimitType);
+                if (gasFee > balanceManager.getAssetBySymbol("ETH").getValue()) {
                     // 油费不足
                     getOperation().addParameter("tokenAmount", gasFee + " ETH");
                     getOperation().forwardClearTop(SendErrorActivity.class);
@@ -505,11 +500,11 @@ public class SendActivity extends BaseActivity {
                 @Override
                 public void onProgressChanged(BubbleSeekBar bubbleSeekBar, int progress, float progressFloat) {
                     gasDataManager.setCustomizeGasPriceInGWei((double) progressFloat);
-                    gasEthValue = Double.parseDouble(gasDataManager.getGasAmountInETH(String.valueOf(gasDataManager.getGasLimitByType("token_transfer")), String
+                    gasEthValue = Double.parseDouble(gasDataManager.getGasAmountInETH(String.valueOf(gasDataManager.getGasLimitByType(gasLimitType)), String
                             .valueOf(gasDataManager.getCustomizeGasPriceInWei())));
                     tvAmount.setText(new StringBuilder(gasEthValue.toString()).append(" ETH ≈ ")
                             .append(CurrencyUtil.format(view.getContext(), gasEthValue * marketcapDataManager.getPriceBySymbol("ETH"))));
-                    tvWalletInfo.setText(new StringBuilder("Gas limit(").append(gasDataManager.getGasLimitByType("token_transfer"))
+                    tvWalletInfo.setText(new StringBuilder("Gas limit(").append(gasDataManager.getGasLimitByType(gasLimitType))
                             .append(") * Gas Price(")
                             .append((int) gasDataManager.getGasPriceInGwei())
                             .append(" Gwei)"));
@@ -535,7 +530,7 @@ public class SendActivity extends BaseActivity {
         }
         gasSeekBar.setProgress((float) gasDataManager.getGasPriceInGwei());
         tvAmount.setText(transacitionFee.getText());
-        tvWalletInfo.setText(new StringBuilder("Gas limit(").append(gasDataManager.getGasLimitByType("token_transfer"))
+        tvWalletInfo.setText(new StringBuilder("Gas limit(").append(gasDataManager.getGasLimitByType(gasLimitType))
                 .append(") * Gas Price(")
                 .append((int) gasDataManager.getGasPriceInGwei())
                 .append(" Gwei)"));
@@ -548,12 +543,30 @@ public class SendActivity extends BaseActivity {
         if (sendChoose == null) {
             sendChoose = (String) SPUtils.get(this, "send_choose", "ETH");
         }
+        updateTransactionFeeUI();
         BalanceResult.Asset asset = balanceManager.getAssetBySymbol(sendChoose);
         setWalletImage(sendChoose);
         sendWalletName.setText(sendChoose);
         walletName2.setText(sendChoose);
         amountTotal = asset.getValue();
         sendWalletCount.setText(asset.getValueShown() + " " + sendChoose);
+    }
+
+    // Update the transaction fee and related UI.
+    private void updateTransactionFeeUI() {
+        gasDataManager.getGasObservable().subscribe(gasPrice -> {
+            LyqbLogger.log("gas: " + gasPrice);
+            gasDataManager.setRecommendGasPrice(gasPrice);
+            if (sendChoose.equals("ETH")) {
+                gasLimitType = "eth_transfer";
+            } else {
+                gasLimitType = "token_transfer";
+            }
+            gasEthValue = Double.parseDouble(gasDataManager.getGasAmountInETH(gasDataManager.getGasLimitByType(gasLimitType)
+                    .toString(), gasDataManager.getGasPriceString()));
+            transacitionFee.setText(new StringBuilder(gasEthValue.toString()).append(" ETH ≈ ")
+                    .append(CurrencyUtil.format(this, gasEthValue * marketcapDataManager.getPriceBySymbol("ETH"))));
+        }, error -> Log.e("Send", error.getMessage()));
     }
 
     private void setWalletImage(String symbol) {
