@@ -10,7 +10,7 @@
     <string name="repeat_password">請再次輸入密碼</string>
     <string name="password_match_toast">輸入密碼不匹配</string>
     <string name="backup_mnemonic">備份助記詞</string>
-    <string name="mnemonic_hint">在網站上上傳助記詞非常危險，如果網站被黑客攻擊或您不小心訪問了釣魚網站，您錢包內的資產將面臨巨大的安全風險</string>
+    <string name="mnemonic_hint">請不要在公眾場所展示(防止攝像頭拍照)，也不要截屏(您的操作系統可能會將圖片備份到雲端存儲)。這些操作會給您帶來巨大而不可逆轉的安全隱患。</string>
     <string name="confirm">確認</string>
     <string name="cancel">取消</string>
     <string name="cancel_order">取消訂單</string>

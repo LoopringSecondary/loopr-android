@@ -10,13 +10,13 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="password_match_toast">Password doesn\'t match</string>
     <string name="backup_mnemonic">Backup Mnemonic</string>
-    <string name="mnemonic_hint">Revealing your mnemonic phrases on web sites is highly dangerous. If the site is compromised or you accidentally visit a phishing website, your assets in all associated addresses can be stolen.</string>
+    <string name="mnemonic_hint">Please don\'t show up in public places (prevent cameras from taking photos) or take a screen shot(your operating system may back up images to cloud storage). These operations can bring you huge and irreversible security risks.</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_order">Cancel Order</string>
     <string name="skip">skip</string>
     <string name="confirm_mnemonic_word">Confirm Mnemonic Word</string>
-    <string name="wallet_create_success">Wallet Create Successull!</string>
+    <string name="wallet_create_success">Wallet Created Successfully!</string>
     <string name="got_it">OK,Got it</string>
     <string name="et_mnemonic">Please use space to separate the words</string>
     <string name="mnemonic_password">Mnemonic Password</string>

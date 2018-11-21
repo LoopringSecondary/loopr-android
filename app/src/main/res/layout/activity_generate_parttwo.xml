@@ -16,17 +16,6 @@
         android:background="@mipmap/mnemonic_one"
         >
 
-
-        <TextView
-            android:id="@+id/backup_mnemonic"
-            style="@style/WrapWrap"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="@string/backup_mnemonic"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/normalText"/>
-
         <TextView
             android:id="@+id/mnemonic_hint"
             style="@style/WrapWrap"
@@ -34,7 +23,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="19dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="30dp"
             android:lineSpacingExtra="3dp"
             android:text="@string/mnemonic_hint"
             android:textColor="@color/colorWhite"
@@ -56,7 +45,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margSide"
-            android:layout_marginRight="@dimen/margSide"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/margSide"
+            android:layout_marginBottom="10dp" />
     </RelativeLayout>
 
     <include layout="@layout/activity_generate_partthree"/>
@@ -69,12 +60,12 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="32dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginBottom="32dp"
             android:layout_weight="1"
             android:text="@string/confirm"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/btn_skip"
@@ -82,12 +73,12 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_gravity="bottom"
+            android:layout_marginLeft="0dp"
             android:layout_marginBottom="32dp"
-            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:text="@string/skip"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite" />
 
     </LinearLayout>
 </LinearLayout>

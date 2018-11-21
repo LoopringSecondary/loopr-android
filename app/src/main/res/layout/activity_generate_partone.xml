@@ -164,9 +164,11 @@
 
         <TextView
             android:id="@+id/password_hint"
-            style="@style/WrapWrap"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
+            android:textAlignment="center"
             android:text="@string/good"
             android:textColor="@color/colorNineText"
             android:textSize="@dimen/normal14Text"

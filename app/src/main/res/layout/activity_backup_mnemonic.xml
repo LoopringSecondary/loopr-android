@@ -21,17 +21,6 @@
         android:background="@mipmap/mnemonic_one"
         >
 
-
-        <TextView
-            android:id="@+id/backup_mnemonic"
-            style="@style/WrapWrap"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="@string/backup_mnemonic"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/normalText"/>
-
         <TextView
             android:id="@+id/mnemonic_hint"
             style="@style/WrapWrap"
@@ -39,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="19dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="30dp"
             android:lineSpacingExtra="3dp"
             android:text="@string/mnemonic_hint"
             android:textColor="@color/colorWhite"
@@ -61,6 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margSide"
-            android:layout_marginRight="@dimen/margSide"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/margSide"
+            android:layout_marginBottom="10dp" />
     </RelativeLayout>
 </LinearLayout>

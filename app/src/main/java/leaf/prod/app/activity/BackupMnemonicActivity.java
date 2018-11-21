@@ -32,9 +32,6 @@ public class BackupMnemonicActivity extends BaseActivity {
     @BindView(R.id.title)
     TitleView title;
 
-    @BindView(R.id.backup_mnemonic)
-    TextView backupMnemonic;
-
     @BindView(R.id.mnemonic_hint)
     TextView mnemonicHint;
 
@@ -43,8 +40,6 @@ public class BackupMnemonicActivity extends BaseActivity {
 
     @BindView(R.id.recycler_mnemonic_hint)
     RecyclerView recyclerMnemonicHint;
-
-    ;
 
     @BindView(R.id.rl_word)
     RelativeLayout rlWord;
@@ -90,7 +85,7 @@ public class BackupMnemonicActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        title.setBTitle(getResources().getString(R.string.generate_wallet));
+        title.setBTitle(getResources().getString(R.string.backup_mnemonic));
         title.clickLeftGoBack(getWContext());
     }
 

@@ -99,9 +99,6 @@ public class GenerateWalletActivity extends BaseActivity {
     @BindView(R.id.generate_parttwo)
     LinearLayout generateParttwo;
 
-    @BindView(R.id.backup_mnemonic)
-    TextView backupMnemonic;
-
     @BindView(R.id.mnemonic_hint)
     TextView mnemonicHint;
 
