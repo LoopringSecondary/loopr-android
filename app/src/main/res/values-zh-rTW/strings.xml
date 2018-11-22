@@ -147,7 +147,8 @@
     <string name="third_part_hint">第三方授權登錄，系統可以保存您的APP配置，\n防止刪除或者更新APP後丟失。 </string>
     <string name="input_mnemonic">請輸入助記詞</string>
     <string name="input_dpath">請輸入dpath</string>
-    <string name="add_wallet_error">錢包創建失敗</string>
+    <string name="private_key_error">私鑰錯誤</string>
+        <string name="add_wallet_error">錢包創建失敗</string>
     <string name="id_error">身份驗證失敗</string>
     <string name="local_file_error">本地文件讀取或解析失敗，請重試</string>
     <string name="mnemonic_invalid">助記詞不合法</string>

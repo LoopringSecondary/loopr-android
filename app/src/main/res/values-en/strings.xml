@@ -147,9 +147,10 @@
     <string name="third_part_hint">It will keep your settings when you login.</string>
     <string name="input_mnemonic">Please input mnemonic</string>
     <string name="input_dpath">Please input dpath</string>
-    <string name="add_wallet_error">Add new wallet error</string>
+    <string name="private_key_error">Failed to import private key</string>
+    <string name="add_wallet_error">Failed to add a new wallet</string>
     <string name="id_error">Identification error</string>
-    <string name="local_file_error">Reading or parsing local file error，retry it</string>
+    <string name="local_file_error">Failed to read or parse the local file. Please retry.</string>
     <string name="mnemonic_invalid">Invalid mnemonic</string>
     <string name="authority">Authority</string>
     <string name="authority_login_success">Authority success</string>

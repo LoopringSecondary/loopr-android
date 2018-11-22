@@ -109,7 +109,7 @@ public class ImportPrivateKeyFragment extends BaseFragment {
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    ToastUtils.toast("创建失败，请重试");
+                                    ToastUtils.toast(getResources().getString(R.string.add_wallet_error));
                                     hideProgress();
                                 }
 
@@ -123,16 +123,16 @@ public class ImportPrivateKeyFragment extends BaseFragment {
                     hideProgress();
                     break;
                 case ERROR_TWO:
-                    ToastUtils.toast("钱包创建失败");
+                    ToastUtils.toast(getResources().getString(R.string.add_wallet_error));
                     hideProgress();
                     break;
                 case ERROR_THREE:
                     hideProgress();
-                    ToastUtils.toast("本地文件读取失败，请重试");
+                    ToastUtils.toast(getResources().getString(R.string.local_file_error));
                     break;
                 case ERROR_FOUR:
                     hideProgress();
-                    ToastUtils.toast("本地文件JSON解析失败，请重试");
+                    ToastUtils.toast(getResources().getString(R.string.local_file_error));
                     break;
             }
         }

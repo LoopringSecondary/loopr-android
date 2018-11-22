@@ -58,10 +58,10 @@ public class KeystoreFragment extends BaseFragment {
                     tvKeystore.setText(keystore);
                     break;
                 case ERROR_ONE:
-                    ToastUtils.toast("本地文件读取失败，请重试");
+                    ToastUtils.toast(getResources().getString(R.string.local_file_error));
                     break;
                 case ERROR_TWO:
-                    ToastUtils.toast("本地文件JSON解析失败，请重试");
+                    ToastUtils.toast(getResources().getString(R.string.local_file_error));
                     break;
             }
         }

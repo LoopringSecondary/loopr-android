@@ -198,7 +198,7 @@ public class GenerateWalletActivity extends BaseActivity {
 
                                     @Override
                                     public void onError(Throwable e) {
-                                        RxToast.error("创建失败，请重试");
+                                        RxToast.error(getResources().getString(R.string.add_wallet_error));
                                         hideProgress();
                                     }
 
@@ -210,11 +210,11 @@ public class GenerateWalletActivity extends BaseActivity {
                     break;
                 case ERROR_ONE:
                     hideProgress();
-                    RxToast.error("本地文件读取失败，请重试");
+                    RxToast.error(getResources().getString(R.string.local_file_error));
                     break;
                 case ERROR_TWO:
                     hideProgress();
-                    RxToast.error("本地文件JSON解析失败，请重试");
+                    RxToast.error(getResources().getString(R.string.local_file_error));
                     break;
             }
         }

@@ -147,6 +147,7 @@
     <string name="third_part_hint">第三方授权登录，系统可以保存您的APP配置，\n防止删除或者更新APP后丢失。</string>
     <string name="input_mnemonic">请输入助记词</string>
     <string name="input_dpath">请输入dpath</string>
+    <string name="private_key_error">私钥错误</string>
     <string name="add_wallet_error">钱包创建失败</string>
     <string name="id_error">身份验证失败</string>
     <string name="local_file_error">本地文件读取或解析失败，请重试</string>

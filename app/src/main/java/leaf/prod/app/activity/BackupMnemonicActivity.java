@@ -59,11 +59,11 @@ public class BackupMnemonicActivity extends BaseActivity {
                     break;
                 case ERROR_ONE:
                     hideProgress();
-                    ToastUtils.toast("本地文件读取失败，请重试");
+                    ToastUtils.toast(getResources().getString(R.string.local_file_error));
                     break;
                 case ERROR_TWO:
                     hideProgress();
-                    ToastUtils.toast("本地文件JSON解析失败，请重试");
+                    ToastUtils.toast(getResources().getString(R.string.local_file_error));
                     break;
             }
         }
