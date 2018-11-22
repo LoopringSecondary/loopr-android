@@ -271,7 +271,7 @@ public class ImportMnemonicFragment extends BaseFragment {
         new Thread(() -> {
             Credentials credentials;
             try {
-                String psw = !"Imtoken".equals(walletType.getText().toString()) ? etPassword.getText().toString() : "";
+                String psw = !"imToken".equals(walletType.getText().toString()) ? etPassword.getText().toString() : "";
                 credentials = MnemonicUtils.calculateCredentialsFromMnemonic(etMnemonic.getText()
                         .toString().trim(), dpath, psw);
                 String privateKeyHexString = CredentialsUtils.toPrivateKeyHexString(credentials.getEcKeyPair()
@@ -293,7 +293,7 @@ public class ImportMnemonicFragment extends BaseFragment {
      * 选择钱包类型
      */
     public void walletChoose() {
-        OptionPicker picker = new OptionPicker((Activity) getContext(), new String[]{"Loopring Wallet", "Imtoken", "MetaMask", "TREZOR (ETH)", "Digital Bitbox", "Exodus", "Jaxx", "Ledger (ETH)", "TREZOR (ETC)", "Ledger (ETC)", "SingularDTV", "Network: Testnets", "Network: Expanse", "Network: Ubiq", "Network: Ellaism", "other"});
+        OptionPicker picker = new OptionPicker((Activity) getContext(), new String[]{"Loopring Wallet", "imToken", "MetaMask", "TREZOR (ETH)", "Digital Bitbox", "Exodus", "Jaxx", "Ledger (ETH)", "TREZOR (ETC)", "Ledger (ETC)", "SingularDTV", "Network: Testnets", "Network: Expanse", "Network: Ubiq", "Network: Ellaism", "other"});
         picker.setOffset(1);
         picker.setSelectedIndex(0);
         picker.setTextSize(18);

@@ -147,7 +147,7 @@ public class WalletUtil {
                 .getWalletType() && !MD5Utils.md5(password).equals(walletEntity.getPas())) {
             throw new InvalidKeystoreException();
         }
-        password = "Imtoken".equals(walletEntity.getWalletFrom()) && ImportWalletType.MNEMONIC == walletEntity.getWalletType() ? "" : password;
+        password = "imToken".equals(walletEntity.getWalletFrom()) && ImportWalletType.MNEMONIC == walletEntity.getWalletType() ? "" : password;
         String keystore = FileUtils.getKeystoreFromSD(context);
         return KeystoreUtils.unlock(password, keystore);
     }
