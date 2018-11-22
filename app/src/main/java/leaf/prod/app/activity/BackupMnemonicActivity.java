@@ -123,7 +123,7 @@ public class BackupMnemonicActivity extends BaseActivity {
         GridLayoutManager layoutManagerHint = new GridLayoutManager(this, 3);
         recyclerMnemonicHint.setLayoutManager(layoutManagerHint);  //助记词提示列表
         mHintAdapter = new MnemonicWordAdapter(R.layout.adapter_item_mnemonic_word_hint, listMnemonic);
-        recyclerMnemonicHint.addItemDecoration(new SpacesItemDecoration(8));
+        recyclerMnemonicHint.addItemDecoration(new SpacesItemDecoration(8, 8, 2, 2));
         recyclerMnemonicHint.setAdapter(mHintAdapter);
     }
 }

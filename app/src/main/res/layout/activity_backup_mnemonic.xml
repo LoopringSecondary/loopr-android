@@ -50,8 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/margSide"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="@dimen/margSide"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="15dp" />
     </RelativeLayout>
 </LinearLayout>
