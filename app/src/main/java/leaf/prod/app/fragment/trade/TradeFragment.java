@@ -1,22 +1,29 @@
 package leaf.prod.app.fragment.trade;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import leaf.prod.app.R;
-import leaf.prod.app.activity.market.MarketRecordsActivity;
-import leaf.prod.app.activity.market.MarketsActivity;
-import leaf.prod.app.activity.trade.ConvertActivity;
-import leaf.prod.app.activity.trade.P2PActivity;
+import leaf.prod.app.adapter.ViewPageAdapter;
 import leaf.prod.app.fragment.BaseFragment;
+import leaf.prod.app.fragment.market.MarketsFragment;
+import leaf.prod.app.presenter.market.TradeFragmentPresenter;
+import leaf.prod.walletsdk.manager.MarketPriceDataManager;
+import leaf.prod.walletsdk.model.MarketsType;
+import leaf.prod.walletsdk.model.Ticker;
 
 /**
  *
@@ -25,14 +32,20 @@ public class TradeFragment extends BaseFragment {
 
     Unbinder unbinder;
 
-    @BindView(R.id.ddex_layout)
-    LinearLayout llDex;
+    @BindView(R.id.market_tab)
+    TabLayout marketTab;
 
-    @BindView(R.id.p2p_layout)
-    LinearLayout llP2P;
+    @BindView(R.id.cl_loading)
+    public ConstraintLayout clLoading;
 
-    @BindView(R.id.order_layout)
-    LinearLayout llOrder;
+    @BindView(R.id.view_pager)
+    public ViewPager viewPager;
+
+    private List<Ticker> list;
+
+    private List<Ticker> listSearch = new ArrayList<>();
+
+    private TradeFragmentPresenter presenter;
 
     @Nullable
     @Override
@@ -54,6 +67,42 @@ public class TradeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        List<Fragment> fragments = new ArrayList<>();
+        String[] titles = new String[MarketsType.values().length];
+        for (MarketsType type : MarketsType.values()) {
+            MarketsFragment fragment = new MarketsFragment();
+            fragment.setMarketsType(type);
+            fragments.add(type.ordinal(), fragment);
+            titles[type.ordinal()] = type.name();
+        }
+        titles[0] = getString(R.string.Favorites);
+        list = MarketPriceDataManager.getInstance(getContext()).getAllTickers();
+        presenter = new TradeFragmentPresenter(this, getContext());
+        presenter.setFragments(fragments);
+        presenter.refreshTickers();
+        presenter.updateAdapter(false, list);
+        setupViewPager(fragments, titles);
+    }
+
+    private void setupViewPager(List<Fragment> fragments, String[] titles) {
+        marketTab.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(titles.length - 1);
+        viewPager.setAdapter(new ViewPageAdapter(getChildFragmentManager(), fragments, titles));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                MarketsFragment fragment = (MarketsFragment) fragments.get(position);
+                fragment.updateAdapter();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     @Override
@@ -64,23 +113,5 @@ public class TradeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-    }
-
-    @OnClick({R.id.ddex_layout, R.id.p2p_layout, R.id.weth_wrap_layout, R.id.order_layout})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.ddex_layout:
-                getOperation().forward(MarketsActivity.class);
-                break;
-            case R.id.p2p_layout:
-                getOperation().forward(P2PActivity.class);
-                break;
-            case R.id.weth_wrap_layout:
-                getOperation().forward(ConvertActivity.class);
-                break;
-            case R.id.order_layout:
-                getOperation().forward(MarketRecordsActivity.class);
-                break;
-        }
     }
 }

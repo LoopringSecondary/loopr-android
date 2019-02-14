@@ -27,6 +27,7 @@ import leaf.prod.app.R;
 import leaf.prod.app.activity.BaseActivity;
 import leaf.prod.app.fragment.infomation.NewsFragment;
 import leaf.prod.app.fragment.setting.SettingFragment;
+import leaf.prod.app.fragment.trade.DappFragment;
 import leaf.prod.app.fragment.trade.TradeFragment;
 import leaf.prod.app.fragment.wallet.MainFragment;
 import leaf.prod.app.utils.AppManager;
@@ -63,6 +64,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_news)
     TextView tvNews;
 
+    @BindView(R.id.rl_dapp)
+    RelativeLayout rlDapp;
+
     @BindView(R.id.rl_trade)
     RelativeLayout rlTrade;
 
@@ -97,7 +101,7 @@ public class MainActivity extends BaseActivity {
 
     private TextView[] textviews; //底部tab-textview集合
 
-    private Fragment fragment1, fragment2, fragment3, fragment4;
+    private Fragment fragment1, fragment2, fragment3, fragment4, fragment5;
 
     private MyTouchListener myTouchListener;
 
@@ -121,6 +125,7 @@ public class MainActivity extends BaseActivity {
         }
         if (WalletUtil.getCurrentWallet(this).getAmount() >= 30) {
             rlTrade.setVisibility(View.VISIBLE);
+            rlDapp.setVisibility(View.VISIBLE);
         }
     }
 
@@ -160,7 +165,7 @@ public class MainActivity extends BaseActivity {
                 fragment3 = manager.findFragmentByTag("TAG3");
                 hideTab(transaction);
                 if (fragment3 == null) {
-                    fragment3 = new NewsFragment();
+                    fragment3 = new DappFragment();
                     transaction.add(R.id.main_frame, fragment3, "TAG3");
                 } else {
                     transaction.show(fragment3);
@@ -170,10 +175,20 @@ public class MainActivity extends BaseActivity {
                 fragment4 = manager.findFragmentByTag("TAG4");
                 hideTab(transaction);
                 if (fragment4 == null) {
-                    fragment4 = new SettingFragment();
+                    fragment4 = new NewsFragment();
                     transaction.add(R.id.main_frame, fragment4, "TAG4");
                 } else {
                     transaction.show(fragment4);
+                }
+                break;
+            case 4:
+                fragment5 = manager.findFragmentByTag("TAG4");
+                hideTab(transaction);
+                if (fragment5 == null) {
+                    fragment5 = new SettingFragment();
+                    transaction.add(R.id.main_frame, fragment5, "TAG4");
+                } else {
+                    transaction.show(fragment5);
                 }
                 break;
         }
@@ -193,20 +208,25 @@ public class MainActivity extends BaseActivity {
         if (fragment4 != null) {
             transaction.hide(fragment4);
         }
+        if (fragment5 != null) {
+            transaction.hide(fragment5);
+        }
     }
 
     private void changeFragment() {
-        imagebuttons = new ImageView[4];
+        imagebuttons = new ImageView[5];
         imagebuttons[0] = (ImageView) findViewById(R.id.iv_main);
         imagebuttons[1] = (ImageView) findViewById(R.id.iv_trade);
-        imagebuttons[2] = (ImageView) findViewById(R.id.iv_news);
-        imagebuttons[3] = (ImageView) findViewById(R.id.iv_setting);
+        imagebuttons[2] = (ImageView) findViewById(R.id.iv_dapp);
+        imagebuttons[3] = (ImageView) findViewById(R.id.iv_news);
+        imagebuttons[4] = (ImageView) findViewById(R.id.iv_setting);
         imagebuttons[0].setSelected(true);
-        textviews = new TextView[4];
+        textviews = new TextView[5];
         textviews[0] = (TextView) findViewById(R.id.tv_main);
         textviews[1] = (TextView) findViewById(R.id.tv_trade);
-        textviews[2] = (TextView) findViewById(R.id.tv_news);
-        textviews[3] = (TextView) findViewById(R.id.tv_setting);
+        textviews[2] = (TextView) findViewById(R.id.tv_dapp);
+        textviews[3] = (TextView) findViewById(R.id.tv_news);
+        textviews[4] = (TextView) findViewById(R.id.tv_setting);
         textviews[0].setTextColor(getResources().getColor(R.color.white));
     }
 
@@ -221,7 +241,7 @@ public class MainActivity extends BaseActivity {
         setTabSelect(type);
     }
 
-    @OnClick({R.id.rl_main, R.id.rl_trade, R.id.rl_news, R.id.rl_setting})
+    @OnClick({R.id.rl_main, R.id.rl_dapp, R.id.rl_trade, R.id.rl_news, R.id.rl_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_main:
@@ -232,13 +252,17 @@ public class MainActivity extends BaseActivity {
                 index = 1;
                 setTabSelect(1);
                 break;
-            case R.id.rl_news:
+            case R.id.rl_dapp:
                 index = 2;
                 setTabSelect(2);
                 break;
-            case R.id.rl_setting:
+            case R.id.rl_news:
                 index = 3;
                 setTabSelect(3);
+                break;
+            case R.id.rl_setting:
+                index = 4;
+                setTabSelect(4);
                 break;
         }
         imagebuttons[currentTabIndex].setSelected(false);

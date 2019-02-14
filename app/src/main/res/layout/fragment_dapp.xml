@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@color/colorPrimary"
+                                             android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/title_text"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="DAPP"
+            android:textColor="@color/colorTitleTv"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/first_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margSide"
+        app:layout_constraintTop_toBottomOf="@id/title_layout">
+
+        <LinearLayout
+            android:id="@+id/ddex_layout"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="@dimen/margSide"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg_pressed"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/order_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:src="@mipmap/icon_ddex"/>
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="8dp"
+                android:text="@string/ddex"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/normal14Text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/order_layout"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginEnd="@dimen/margSide"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg_pressed"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/ddex_layout"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:src="@mipmap/icon_orders"/>
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="8dp"
+                android:text="@string/orders"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/normal14Text"/>
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/second_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margSide"
+        app:layout_constraintTop_toBottomOf="@id/first_line">
+
+        <LinearLayout
+            android:id="@+id/weth_wrap_layout"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="@dimen/margSide"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg_pressed"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/p2p_layout">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:src="@mipmap/icon_tx_convert"/>
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="8dp"
+                android:text="@string/convert_weth"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/normal14Text"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/p2p_layout"
+            android:layout_width="0dp"
+            android:layout_height="104dp"
+            android:layout_marginEnd="@dimen/margSide"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg_pressed"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/weth_wrap_layout"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:src="@mipmap/icon_p2p"/>
+
+            <TextView
+                style="@style/WrapWrap"
+                android:layout_marginTop="8dp"
+                android:text="@string/p2p"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/normal14Text"/>
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

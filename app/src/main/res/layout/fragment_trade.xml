@@ -3,161 +3,83 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent"
-                                             android:background="@color/colorPrimary"
-                                             android:orientation="vertical">
+                                             android:background="@color/colorPrimary">
 
-    <RelativeLayout
-        android:id="@+id/title_layout"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/title_text"
-            style="@style/Text.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:ellipsize="end"
-            android:singleLine="true"
+            style="@style/WrapWrap"
             android:text="@string/trade"
             android:textColor="@color/colorTitleTv"
             android:textSize="18sp"/>
-    </RelativeLayout>
+    </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/first_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margSide"
-        app:layout_constraintTop_toBottomOf="@id/title_layout">
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/rl_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_weight="1">
 
         <LinearLayout
-            android:id="@+id/ddex_layout"
-            android:layout_width="0dp"
-            android:layout_height="104dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginStart="@dimen/margSide"
-            android:layout_weight="1"
-            android:background="@drawable/button_bg_pressed"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/order_layout">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:src="@mipmap/icon_ddex"/>
+            <android.support.design.widget.TabLayout
+                android:id="@+id/market_tab"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:tabIndicatorColor="@color/colorCenter"
+                app:tabSelectedTextColor="@color/colorWhite"
+                app:tabTextColor="@color/colorSixText">
 
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_marginTop="8dp"
-                android:text="@string/ddex"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal14Text"/>
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/Favorites"/>
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="WETH"/>
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="LRC"/>
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="USDT"/>
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="TUSD"/>
+
+            </android.support.design.widget.TabLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/order_layout"
-            android:layout_width="0dp"
-            android:layout_height="104dp"
-            android:layout_marginEnd="@dimen/margSide"
-            android:layout_marginStart="6dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_bg_pressed"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/ddex_layout"
-            app:layout_constraintRight_toRightOf="parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:src="@mipmap/icon_orders"/>
-
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_marginTop="8dp"
-                android:text="@string/orders"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal14Text"/>
-        </LinearLayout>
-
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/second_line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margSide"
-        app:layout_constraintTop_toBottomOf="@id/first_line">
-
-        <LinearLayout
-            android:id="@+id/weth_wrap_layout"
-            android:layout_width="0dp"
-            android:layout_height="104dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginStart="@dimen/margSide"
-            android:layout_weight="1"
-            android:background="@drawable/button_bg_pressed"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/p2p_layout">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:src="@mipmap/icon_tx_convert"/>
-
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_marginTop="8dp"
-                android:text="@string/convert_weth"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal14Text"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/p2p_layout"
-            android:layout_width="0dp"
-            android:layout_height="104dp"
-            android:layout_marginEnd="@dimen/margSide"
-            android:layout_marginStart="6dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_bg_pressed"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@id/weth_wrap_layout"
-            app:layout_constraintRight_toRightOf="parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:src="@mipmap/icon_p2p"/>
-
-            <TextView
-                style="@style/WrapWrap"
-                android:layout_marginTop="8dp"
-                android:text="@string/p2p"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/normal14Text"/>
-        </LinearLayout>
-
-    </android.support.constraint.ConstraintLayout>
-
+    <include layout="@layout/activity_loading"/>
+    <!--<include layout="@layout/activity_markets"/>-->
 </android.support.constraint.ConstraintLayout>
