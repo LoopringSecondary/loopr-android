@@ -1,6 +1,13 @@
 
 # Release Note:
 
+## v1.6.3
+### 中文
+<font color=white> 修复下单功能中闪退的bug </font>  
+
+### English
+<font color=white> fix crash bug when place order </font> 
+
 ## v1.6.2
 ### 中文
 <font color=white> 修复下单功能，部分代币闪退的bug </font>  
