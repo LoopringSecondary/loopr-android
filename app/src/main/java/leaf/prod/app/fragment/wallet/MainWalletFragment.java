@@ -40,6 +40,7 @@ import leaf.prod.app.activity.trade.P2PConfirmActivity;
 import leaf.prod.app.activity.wallet.ActivityScanerCode;
 import leaf.prod.app.activity.wallet.AirdropActivity;
 import leaf.prod.app.activity.wallet.AuthorityWebActivity;
+import leaf.prod.app.activity.wallet.ContactListActivity;
 import leaf.prod.app.activity.wallet.MainActivity;
 import leaf.prod.app.activity.wallet.ReceiveActivity;
 import leaf.prod.app.activity.wallet.SendActivity;
@@ -102,6 +103,9 @@ public class MainWalletFragment extends BaseFragment {
 
     @BindView(R.id.ll_trade)
     LinearLayout llTrade;
+
+    @BindView(R.id.ll_contact)
+    LinearLayout llContact;
 
     @BindView(R.id.menu_scan)
     LinearLayout menuScan;
@@ -285,7 +289,7 @@ public class MainWalletFragment extends BaseFragment {
         presenter.destroy();
     }
 
-    @OnClick({R.id.ll_scan, R.id.ll_receive, R.id.ll_send, R.id.ll_trade, R.id.menu_scan, R.id.menu_add_assets, R.id.menu_wallet, R.id.right_btn, R.id.ll_main, R.id.wallet_qrcode})
+    @OnClick({R.id.ll_scan, R.id.ll_receive, R.id.ll_send, R.id.ll_trade, R.id.ll_contact, R.id.menu_scan, R.id.menu_add_assets, R.id.menu_wallet, R.id.right_btn, R.id.ll_main, R.id.wallet_qrcode})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_scan:  //scan 按钮
@@ -318,6 +322,9 @@ public class MainWalletFragment extends BaseFragment {
                 break;
             case R.id.ll_trade://trade 按钮
                 getOperation().forward(AirdropActivity.class);
+                break;
+            case R.id.ll_contact:
+                getOperation().forward(ContactListActivity.class);
                 break;
             case R.id.right_btn:  //右上角添加按钮
                 if (llMenu.getVisibility() == View.GONE) {
