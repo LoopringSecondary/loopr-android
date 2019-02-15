@@ -1,6 +1,7 @@
 package leaf.prod.app.activity.market;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.BaseActivity;
+import leaf.prod.app.adapter.NoDataAdapter;
 import leaf.prod.app.adapter.market.MarketDepthAdapter;
 import leaf.prod.app.presenter.market.MarketTradePresenter;
 import leaf.prod.app.utils.ButtonClickUtil;
@@ -30,6 +32,7 @@ import leaf.prod.app.views.TitleView;
 import leaf.prod.walletsdk.manager.MarketOrderDataManager;
 import leaf.prod.walletsdk.manager.MarketPriceDataManager;
 import leaf.prod.walletsdk.manager.MarketcapDataManager;
+import leaf.prod.walletsdk.model.NoDataType;
 import leaf.prod.walletsdk.model.TradeType;
 import leaf.prod.walletsdk.util.CurrencyUtil;
 import leaf.prod.walletsdk.util.NumberUtils;
@@ -84,6 +87,9 @@ public class MarketTradeActivity2 extends BaseActivity {
     @BindView(R.id.tv_market_price)
     public TextView tvMarketPrice;
 
+    @BindView(R.id.tv_market_price_token)
+    public TextView tvMarketPriceToken;
+
     @BindView(R.id.rv_sell)
     public RecyclerView rvSell;
 
@@ -114,6 +120,10 @@ public class MarketTradeActivity2 extends BaseActivity {
     private MarketDepthAdapter sellAdapter;
 
     private MarketDepthAdapter buyAdapter;
+
+    private NoDataAdapter emptySellAdapter;
+
+    private NoDataAdapter emptyBuyAdapter;
 
     private MarketOrderDataManager orderDataManager;
 
@@ -197,38 +207,51 @@ public class MarketTradeActivity2 extends BaseActivity {
 
     @Override
     public void initData() {
-        List<String[]> buyList = priceDataManager.getDepths("buy").subList(0, 5);
-        List<String[]> sellList = Lists.reverse(priceDataManager.getDepths("sell").subList(0, 5));
+        List<String[]> buyList = new ArrayList<>();
+        List<String[]> sellList = new ArrayList<>();
+        int step = 0;
+        for (String[] buyDepth : priceDataManager.getDepths("buy")) {
+            if (buyDepth[0].isEmpty() || step++ == 5)
+                break;
+            buyList.add(buyDepth);
+        }
+        step = 0;
+        for (String[] sellDepth : Lists.reverse(priceDataManager.getDepths("sell"))) {
+            if (sellDepth[0].isEmpty() || step++ == 5)
+                break;
+            sellList.add(sellDepth);
+        }
         orderDataManager.setPriceFromDepth(getIntent().getStringExtra("priceFromDepth"));
-        if (buyList.size() < 5) {
-            for (int i = buyList.size(); i <= 5; ++i) {
-                buyList.add(null);
-            }
-        }
-        if (sellList.size() < 5) {
-            for (int i = 0; i < 5 - sellList.size(); ++i) {
-                sellList.add(i, null);
-            }
-        }
-        sellAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, sellList.subList(sellList.size() - 5, sellList
-                .size()), "sell");
-        sellAdapter.setOnItemClickListener((adapter, view, position) -> {
-            String[] sell = sellList.get(position);
-            if (sell != null && !sell[0].isEmpty()) {
-                presenter.clickPrice(NumberUtils.format1(Double.parseDouble(sell[0]), 8));
-            }
-        });
-        rvSell.setAdapter(sellAdapter);
         rvSell.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        buyAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, buyList, "buy");
-        buyAdapter.setOnItemClickListener((adapter, view, position) -> {
-            String[] buy = buyList.get(position);
-            if (buy != null && !buy[0].isEmpty()) {
-                presenter.clickPrice(NumberUtils.format1(Double.parseDouble(buy[0]), 8));
-            }
-        });
-        rvBuy.setAdapter(buyAdapter);
         rvBuy.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        if (sellList.size() > 0) {
+            sellAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, sellList, "sell");
+            sellAdapter.setOnItemClickListener((adapter, view, position) -> {
+                String[] sell = sellList.get(position);
+                if (sell != null && !sell[0].isEmpty()) {
+                    presenter.clickPrice(NumberUtils.format1(Double.parseDouble(sell[0]), 8));
+                }
+            });
+            rvSell.setAdapter(sellAdapter);
+        } else {
+            emptySellAdapter = new NoDataAdapter(R.layout.adapter_item_no_data, null, NoDataType.market_depth_sell);
+            rvSell.setAdapter(emptySellAdapter);
+            emptySellAdapter.refresh();
+        }
+        if (buyList.size() > 0) {
+            buyAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, buyList, "buy");
+            buyAdapter.setOnItemClickListener((adapter, view, position) -> {
+                String[] buy = buyList.get(position);
+                if (buy != null && !buy[0].isEmpty()) {
+                    presenter.clickPrice(NumberUtils.format1(Double.parseDouble(buy[0]), 8));
+                }
+            });
+            rvBuy.setAdapter(buyAdapter);
+        } else {
+            emptyBuyAdapter = new NoDataAdapter(R.layout.adapter_item_no_data, null, NoDataType.market_depth_buy);
+            rvBuy.setAdapter(emptyBuyAdapter);
+            emptyBuyAdapter.refresh();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -306,7 +329,7 @@ public class MarketTradeActivity2 extends BaseActivity {
             case R.id.btn_buy:
             case R.id.btn_sell:
                 if (!(ButtonClickUtil.isFastDoubleClick(1))) { //防止一秒内多次点击
-                    presenter.showTradeDetailDialog();
+                    presenter.doBuyOrSell();
                 }
                 break;
         }

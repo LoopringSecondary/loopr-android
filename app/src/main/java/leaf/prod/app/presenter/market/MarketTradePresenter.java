@@ -89,8 +89,8 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
     public void setBalanceHint() {
         if (!view.etPrice.getText().toString().isEmpty() && !view.etPrice.getText().toString().equals(".")
                 && !view.etAmount.getText().toString().isEmpty() && !view.etAmount.getText().toString().equals(".")) {
-            view.llAvailBuy.setVisibility(View.GONE);
             view.llAvailSell.setVisibility(View.GONE);
+            view.llAvailBuy.setVisibility(View.GONE);
             view.llBuyAmount.setVisibility(View.VISIBLE);
             if (orderDataManager.getType() == TradeType.buy) {
                 view.tvBuyAmount.setText(NumberUtils.format1(BigDecimal.valueOf(Double.parseDouble(view.etPrice.getText()
@@ -128,7 +128,8 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
                 .build();
         ticker = priceDataManager.getTickerBy(tradingPair);
         if (ticker != null) {
-            view.tvMarketPrice.setText(ticker.getBalanceShown() + " ≈ " + ticker.getCurrencyShown());
+            view.tvMarketPrice.setText(ticker.getBalanceShown());
+            view.tvMarketPriceToken.setText(" " + orderDataManager.getTokenA() + " ≈ " + ticker.getCurrencyShown());
         }
         assetA = balanceDataManager.getAssetBySymbol(orderDataManager.getTokenA());
         assetB = balanceDataManager.getAssetBySymbol(orderDataManager.getTokenB());
