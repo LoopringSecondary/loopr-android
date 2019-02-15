@@ -326,6 +326,11 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".activity.market.MarketTradeActivity2"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".activity.market.MarketSuccessActivity"
             android:exported="false"
             android:launchMode="singleTask"

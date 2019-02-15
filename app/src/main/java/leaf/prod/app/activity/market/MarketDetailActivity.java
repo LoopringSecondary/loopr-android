@@ -462,11 +462,11 @@ public class MarketDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_buy:
                 orderDataManager.setType(TradeType.buy);
-                getOperation().forward(MarketTradeActivity.class);
+                getOperation().forward(MarketTradeActivity2.class);
                 break;
             case R.id.btn_sell:
                 orderDataManager.setType(TradeType.sell);
-                getOperation().forward(MarketTradeActivity.class);
+                getOperation().forward(MarketTradeActivity2.class);
                 break;
         }
     }

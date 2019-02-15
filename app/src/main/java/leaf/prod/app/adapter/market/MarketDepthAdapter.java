@@ -22,7 +22,9 @@ public class MarketDepthAdapter extends BaseQuickAdapter<String[], BaseViewHolde
 
     @Override
     protected void convert(BaseViewHolder helper, String[] depth) {
-        if (depth == null || depth.length != 3 || StringUtils.isEmpty(side)) { return; }
+        if (depth == null || depth.length != 3 || StringUtils.isEmpty(side)) {
+            return;
+        }
         if (StringUtils.isEmpty(depth[0]) || StringUtils.isEmpty(depth[1])) {
             helper.setText(R.id.tv_price, "");
             helper.setText(R.id.tv_amount, "");

@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="true">
+    <item android:state_selected="true">
         <shape>
             <corners android:bottomLeftRadius="10dp" android:topLeftRadius="10dp"/>
-            <gradient android:centerColor="@color/black" android:centerX="0.5" android:centerY="0.5" android:endColor="@color/black" android:startColor="@color/black"/>
+            <solid android:color="@color/colorPrimary"/>
         </shape>
     </item>
-    <item android:state_enabled="false">
-        <shape>
-            <corners android:bottomLeftRadius="10dp" android:topLeftRadius="10dp"/>
-            <solid android:color="@color/colorBg"/>
-        </shape>
-    </item>
-
-    <item>
+    <item android:state_selected="false">
         <shape>
             <corners android:bottomLeftRadius="10dp" android:topLeftRadius="10dp"/>
             <solid android:color="@color/colorBg"/>
