@@ -222,7 +222,7 @@
                     android:layout_height="40dp"
                     android:layout_marginEnd="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/text_bg_pressed_left"
+                    android:background="@drawable/text_bg_pressed_left_10"
                     android:gravity="center"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_12"/>
@@ -254,7 +254,7 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/text_bg_pressed_right"
+                    android:background="@drawable/text_bg_pressed_right_10"
                     android:gravity="center"
                     android:text="@string/custom"
                     android:textColor="@color/colorNineText"
