@@ -319,6 +319,7 @@
     <string name="available_balance2">Balance</string>
     <string name="max_buy">Max Buy</string>
     <string name="total_balance">Total</string>
+    <string name="precision">%d decimals</string>
 
     <!-- 新闻相关 -->
     <string name="news">News</string>

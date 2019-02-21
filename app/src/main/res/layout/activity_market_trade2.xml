@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -403,71 +404,131 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/margSide"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="@dimen/margSide"
-            android:layout_weight="45"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="4位小数"
-                android:textColor="@color/colorNineText"
-                android:textSize="@dimen/text_12"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/margSide"
-                android:background="@color/lineBac"/>
+            android:layout_weight="45">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margSide"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/btn_precision"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/price"
-                    android:textColor="@color/colorNineText"
-                    android:textSize="@dimen/text_11"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margSide"
+                        android:text="8位小数"
+                        android:textColor="@color/colorNineText"
+                        android:textSize="@dimen/text_12"/>
+
+                    <ImageView
+                        android:id="@+id/iv_show_precision"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:rotation="-90"
+                        android:src="@mipmap/icon_back"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/margSide"
+                    android:background="@color/lineBac"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/amount"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/colorNineText"
-                    android:textSize="@dimen/text_11"/>
+                    android:layout_marginTop="@dimen/margSide"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/price"
+                        android:textColor="@color/colorNineText"
+                        android:textSize="@dimen/text_11"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/amount"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/colorNineText"
+                        android:textSize="@dimen/text_11"/>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_sell"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/lineBac"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"/>
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_sell"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"/>
+            <LinearLayout
+                android:id="@+id/ll_precision"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/radius_dark_bg"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/lineBac"/>
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="8位小数"-->
+                <!--android:textColor="@color/colorNineText"-->
+                <!--android:textSize="@dimen/text_10"/>-->
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_buy"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"/>
-        </LinearLayout>
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="4位小数"-->
+                <!--android:textColor="@color/colorNineText"-->
+                <!--android:textSize="@dimen/text_10"/>-->
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:gravity="center"-->
+                <!--android:text="2位小数"-->
+                <!--android:textColor="@color/colorNineText"-->
+                <!--android:textSize="@dimen/text_10"/>-->
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </LinearLayout>
-
 </LinearLayout>
