@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -101,6 +102,7 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
         buttonList.add(view.btnPer50);
         buttonList.add(view.btnPer75);
         buttonList.add(view.btnPer100);
+        addPrecisionList(Arrays.asList(8, 4, 2));
     }
 
     @SuppressLint("SetTextI18n")
@@ -147,7 +149,7 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
         ticker = priceDataManager.getTickerBy(tradingPair);
         if (ticker != null) {
             view.tvMarketPrice.setText(ticker.getBalanceShown());
-            view.tvMarketPriceToken.setText(" " + orderDataManager.getTokenA() + " ≈ " + ticker.getCurrencyShown());
+            view.tvMarketPriceToken.setText(" " + orderDataManager.getTokenB() + " ≈ " + ticker.getCurrencyShown());
         }
         assetA = balanceDataManager.getAssetBySymbol(orderDataManager.getTokenA());
         assetB = balanceDataManager.getAssetBySymbol(orderDataManager.getTokenB());
@@ -172,7 +174,6 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
                 break;
             }
         }
-        addPrecisionList(Arrays.asList(8, 4, 2));
     }
 
     private void addPrecisionList(List<Integer> list) {
@@ -186,11 +187,11 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
             textView.setOnClickListener(view -> {
                 List<String[]> newSellList = new ArrayList<>(), newBuyList = new ArrayList<>();
                 for (String[] item : sellPriceList) {
-                    newSellList.add(new String[]{NumberUtils.format1(Double.parseDouble(item[0]), step), item[1]});
+                    newSellList.add(new String[]{NumberUtils.format1(Double.parseDouble(item[0]), step), item[1], item[2]});
                 }
                 setSellPriceList(newSellList);
                 for (String[] item : buyPriceList) {
-                    newBuyList.add(new String[]{NumberUtils.format1(Double.parseDouble(item[0]), step), item[1]});
+                    newBuyList.add(new String[]{NumberUtils.format1(Double.parseDouble(item[0]), step), item[1], item[2]});
                 }
                 setBuyPriceList(newBuyList);
             });
@@ -218,8 +219,10 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
             }
         } else {
             if (sellList.size() > 0) {
+                for(String[] item : sellList) {
+                    Log.d("", item[0] + " " + item[1] + " " + item[2]);
+                }
                 sellAdapter.setNewData(sellList);
-                sellAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -245,7 +248,6 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
         } else {
             if (buyList.size() > 0) {
                 buyAdapter.setNewData(buyList);
-                buyAdapter.notifyDataSetChanged();
             }
         }
     }
