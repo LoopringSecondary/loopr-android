@@ -207,17 +207,19 @@ public class MarketTradeActivity2 extends BaseActivity {
     public void initData() {
         List<String[]> buyList = new ArrayList<>();
         List<String[]> sellList = new ArrayList<>();
-        int step = 0;
         for (String[] buyDepth : priceDataManager.getDepths("buy")) {
-            if (buyDepth[0].isEmpty() || step++ == 5)
-                break;
+            if (buyDepth[0].isEmpty())
+                continue;
             buyList.add(buyDepth);
-        }
-        step = 0;
-        for (String[] sellDepth : Lists.reverse(priceDataManager.getDepths("sell"))) {
-            if (sellDepth[0].isEmpty() || step++ == 5)
+            if (buyList.size() == 5)
                 break;
+        }
+        for (String[] sellDepth : Lists.reverse(priceDataManager.getDepths("sell"))) {
+            if (sellDepth[0].isEmpty())
+                continue;
             sellList.add(sellDepth);
+            if (sellList.size() == 5)
+                break;
         }
         orderDataManager.setPriceFromDepth(getIntent().getStringExtra("priceFromDepth"));
         presenter.setBuyPriceList(buyList);
