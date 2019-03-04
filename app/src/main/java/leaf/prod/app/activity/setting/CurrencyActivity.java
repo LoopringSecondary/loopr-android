@@ -48,6 +48,8 @@ public class CurrencyActivity extends BaseActivity {
 
     private MarketcapDataManager marketcapDataManager;
 
+    private double ratio = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_currency);
@@ -86,18 +88,22 @@ public class CurrencyActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_cny:
-                SPUtils.put(this, "isRecreate", true);
-                CurrencyUtil.setCurrency(this, Currency.CNY);
-                updateWalletList(Currency.CNY);
-                ivCnyCheck.setVisibility(View.VISIBLE);
-                ivUsdCheck.setVisibility(View.GONE);
+                if (CurrencyUtil.getCurrency(this) != Currency.CNY) {
+                    SPUtils.put(this, "isRecreate", true);
+                    CurrencyUtil.setCurrency(this, Currency.CNY);
+                    updateWalletList(Currency.CNY);
+                    ivCnyCheck.setVisibility(View.VISIBLE);
+                    ivUsdCheck.setVisibility(View.GONE);
+                }
                 break;
             case R.id.ll_usd:
-                SPUtils.put(this, "isRecreate", true);
-                CurrencyUtil.setCurrency(this, Currency.USD);
-                updateWalletList(Currency.USD);
-                ivCnyCheck.setVisibility(View.GONE);
-                ivUsdCheck.setVisibility(View.VISIBLE);
+                if (CurrencyUtil.getCurrency(this) != Currency.USD) {
+                    SPUtils.put(this, "isRecreate", true);
+                    CurrencyUtil.setCurrency(this, Currency.USD);
+                    updateWalletList(Currency.USD);
+                    ivCnyCheck.setVisibility(View.GONE);
+                    ivUsdCheck.setVisibility(View.VISIBLE);
+                }
                 break;
         }
     }
@@ -112,13 +118,19 @@ public class CurrencyActivity extends BaseActivity {
                     if (marketcapResult.getTokens() != null && marketcapResult.getTokens().size() > 0) {
                         price = marketcapResult.getTokens().get(0).getPrice();
                     }
+                    if (!marketcapDataManager.getMarketcapResult().getCurrency().equals(currency.getText())) {
+                        ratio = price / marketcapDataManager.getPriceBySymbol("ETH");
+                    } else {
+                        ratio = 1 / ratio;
+                    }
                     List<WalletEntity> wallets = WalletUtil.getWalletList(this);
                     for (WalletEntity wallet : wallets) {
                         wallets.get(wallets.indexOf(wallet))
-                                .setAmount(wallet.getAmount() / marketcapDataManager.getPriceBySymbol("ETH") * price);
+                                .setAmount(wallet.getAmount() * ratio);
                         wallets.get(wallets.indexOf(wallet))
                                 .setAmountShow(CurrencyUtil.format(this, wallet.getAmount()));
-                        if (wallet.getAddress().equalsIgnoreCase(WalletUtil.getCurrentAddress(this))) {
+                        if (wallet.getAddress()
+                                .equalsIgnoreCase(WalletUtil.getCurrentAddress(this))) {
                             WalletUtil.setCurrentWallet(this, wallet);
                         }
                     }
