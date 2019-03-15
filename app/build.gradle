@@ -136,4 +136,5 @@ dependencies {
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'me.kaelaela:verticalviewpager:1.0.0@aar'
     implementation 'it.sephiroth.android.library.imagezoom:imagezoom:2.3.0'
+    implementation project(':flutter')
 }
