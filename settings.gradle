@@ -1,1 +1,3 @@
 include ':app', ':walletsdk'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(settingsDir.parentFile, 'loopr-flutter-module/demo/.android/include_flutter.groovy'))
