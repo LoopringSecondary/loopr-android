@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/setting_view"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/colorPrimary"
@@ -33,6 +34,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/lineBac"/>
+
+            <LinearLayout
+                android:id="@+id/ll_flutter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/itemHeight"
+                android:background="@drawable/button_bg3_pressed"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Flutter"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/font_14"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/icon_next"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_share"
