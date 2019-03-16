@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.flutter.facade.Flutter;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.ShareActivity;
 import leaf.prod.app.activity.setting.ContractVersionActivity;
@@ -46,6 +49,9 @@ import retrofit2.Response;
 public class SettingFragment extends BaseFragment {
 
     Unbinder unbinder;
+
+    @BindView(R.id.ll_flutter)
+    LinearLayout llFlutter;
 
     @BindView(R.id.ll_share)
     LinearLayout llShare;
@@ -189,9 +195,21 @@ public class SettingFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.ll_share, R.id.ll_manager_wallet, R.id.ll_money_type, R.id.ll_language, R.id.ll_id_touch, R.id.ll_contract_version, R.id.ll_lrc_proportion, R.id.ll_margin_split, R.id.ll_app_version})
+    @OnClick({R.id.ll_flutter, R.id.ll_share, R.id.ll_manager_wallet, R.id.ll_money_type, R.id.ll_language, R.id.ll_id_touch, R.id.ll_contract_version, R.id.ll_lrc_proportion, R.id.ll_margin_split, R.id.ll_app_version})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.ll_flutter:  // Flutter
+                View flutterView = Flutter.createView(
+                        getActivity(),
+                        getLifecycle(),
+                        "route1"
+                );
+                DisplayMetrics metrics = new DisplayMetrics();
+                getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels-60);
+                layout.topMargin = 60;
+                getActivity().addContentView(flutterView, layout);
+                break;
             case R.id.ll_share:  //分享
                 getOperation().forward(ShareActivity.class);
                 break;
