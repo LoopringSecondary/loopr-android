@@ -30,10 +30,10 @@
             android:id="@+id/ll_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:isScrollContainer="true"
-            android:orientation="vertical"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:isScrollContainer="true"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/buttonPanel"
             app:layout_constraintTop_toBottomOf="@id/title">
 
@@ -42,8 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
                 android:background="@drawable/radius_bg_29"
                 android:orientation="vertical">
 
@@ -52,9 +52,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_weight="1.5"
                     android:gravity="center_vertical"
                     android:singleLine="true"
@@ -63,8 +63,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -91,9 +91,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -125,8 +125,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
                 android:background="@drawable/radius_bg_29"
                 android:orientation="vertical"
                 android:visibility="gone">
@@ -235,8 +235,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
@@ -285,28 +285,39 @@
 
             </LinearLayout>
 
-            <leaf.prod.app.views.CustomCandleChart
+            <!--<leaf.prod.app.views.CustomCandleChart-->
+            <!--android:id="@+id/kchart"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="240dp"-->
+            <!--android:layout_marginEnd="@dimen/margSide"-->
+            <!--android:layout_marginStart="@dimen/margSide"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:background="@color/colorPrimary"/>-->
+
+            <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/kchart"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:layout_marginEnd="@dimen/margSide"
                 android:layout_marginStart="@dimen/margSide"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorPrimary"/>
+                android:layout_marginEnd="@dimen/margSide"
+                android:background="@color/colorPrimary"
+                android:visibility="gone"/>
 
-            <leaf.prod.app.views.CustomCandleChart
+            <com.github.mikephil.charting.charts.CombinedChart
                 android:id="@+id/bchart"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginEnd="@dimen/margSide"
                 android:layout_marginStart="@dimen/margSide"
-                android:background="@color/colorPrimary"/>
+                android:layout_marginEnd="@dimen/margSide"
+                android:background="@color/colorPrimary"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margSide"
                 android:layout_marginStart="@dimen/margSide"
+                android:layout_marginEnd="@dimen/margSide"
                 android:orientation="horizontal">
 
                 <Button
@@ -365,12 +376,27 @@
                     android:textSize="12sp"/>
             </LinearLayout>
 
+            <com.github.tifezh.kchartlib.chart.KChartView
+                android:id="@+id/kchart_view"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="@dimen/margSide"
+                android:layout_marginEnd="@dimen/margSide"
+                app:kc_background_color="@color/colorPrimary"
+                app:kc_grid_line_width="0.8dp"
+                app:kc_grid_line_color="@color/colorBg2"
+                app:kc_up_color="@color/colorGreen"
+                app:kc_d_color="@color/colorRed"
+                app:kc_tab_background_color="@color/colorBg2"
+                app:kc_text_size="10sp">
+            </com.github.tifezh.kchartlib.chart.KChartView>
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/market_tab"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginEnd="12dp"
                 android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 app:tabIndicatorColor="@color/colorCenter"
                 app:tabSelectedTextColor="@color/colorWhite"
                 app:tabTextColor="@color/colorSixText">
@@ -401,8 +427,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:gravity="bottom"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

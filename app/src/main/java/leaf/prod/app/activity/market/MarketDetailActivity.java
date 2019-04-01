@@ -9,15 +9,13 @@ package leaf.prod.app.activity.market;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -25,13 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.CandleData;
-import com.github.mikephil.charting.data.CandleDataSet;
-import com.github.mikephil.charting.data.CandleEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.tifezh.kchartlib.chart.KChartView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,21 +32,19 @@ import butterknife.OnClick;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.BaseActivity;
 import leaf.prod.app.adapter.ViewPageAdapter;
+import leaf.prod.app.adapter.market.KLineEntity;
+import leaf.prod.app.adapter.market.MarketChartAdapter;
 import leaf.prod.app.fragment.market.MarketDepthFragment;
 import leaf.prod.app.fragment.market.MarketHistoryFragment;
-import leaf.prod.app.layout.MyMarkerView;
 import leaf.prod.app.presenter.market.MarketDetailPresenter;
-import leaf.prod.app.views.CustomCandleChart;
 import leaf.prod.app.views.TitleView;
 import leaf.prod.walletsdk.manager.MarketOrderDataManager;
 import leaf.prod.walletsdk.manager.MarketPriceDataManager;
 import leaf.prod.walletsdk.model.Ticker;
 import leaf.prod.walletsdk.model.TradeType;
 import leaf.prod.walletsdk.model.TradingPair;
-import leaf.prod.walletsdk.model.Trend;
 import leaf.prod.walletsdk.model.TrendInterval;
 import leaf.prod.walletsdk.util.NumberUtils;
-import leaf.prod.walletsdk.util.StringUtils;
 
 public class MarketDetailActivity extends BaseActivity {
 
@@ -107,12 +98,21 @@ public class MarketDetailActivity extends BaseActivity {
 
     @BindView(R.id.tv_change)
     public TextView tvChange;
+    //
+    //    @BindView(R.id.kchart)
+    //    public CustomCandleChart kLineChart;
+    //
+    //    @BindView(R.id.bchart)
+    //    public CustomCandleChart barChart;
+
+    @BindView(R.id.kchart_view)
+    public KChartView kChartView;
 
     @BindView(R.id.kchart)
-    public CustomCandleChart kLineChart;
+    public CombinedChart kLineChart;
 
     @BindView(R.id.bchart)
-    public CustomCandleChart barChart;
+    public CombinedChart barChart;
 
     @BindView(R.id.btn_1hr)
     public Button btn1Hr;
@@ -140,9 +140,15 @@ public class MarketDetailActivity extends BaseActivity {
 
     private MarketPriceDataManager priceDataManager;
 
+    private MarketDetailPresenter presenter;
+
     private TrendInterval interval = TrendInterval.ONE_DAY;
 
     private final static int REQUEST_MARKET_CODE = 1;
+
+    private MarketChartAdapter chartAdapter;
+
+    private ScaleGestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,68 +176,52 @@ public class MarketDetailActivity extends BaseActivity {
     }
 
     @Override
+    public void initData() {
+    }
+
+    @Override
     public void initView() {
         setupButtons();
         setupViewPager();
         barChart.setViewPortOffsets(128f, 0f, 0f, 40f);
         kLineChart.setViewPortOffsets(128f, 160f, 0f, 0f);
+        chartAdapter = new MarketChartAdapter();
+        kChartView.setAdapter(chartAdapter);
+        kChartView.showLoading();
+//        final List<KLineEntity> data = DataRequest.getALL(MarketDetailActivity.this);
+//        chartAdapter.addFooterData(data);
+//        kChartView.startAnimation();
+//        kChartView.refreshEnd();
     }
 
-    private float getMinimum(CustomCandleChart chart) {
-        float result = 0f;
-        if (chart == kLineChart) {
-            result = getLowestPrice();
-        }
-        return result;
+    public void updateAdapter() {
+        updateTitleLabel();
+        //        presenter.updateKLineChart();
+        //        presenter.updateBarChart();
+        List<KLineEntity> datas = presenter.updateChartDatas();
+        chartAdapter.addFooterData(datas);
+        kChartView.startAnimation();
+        kChartView.refreshEnd();
+//        kChartView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                kChartView.draw
+//            }
+//        });
     }
 
-    private float getMaximum(CustomCandleChart chart) {
-        float result;
-        if (chart == kLineChart) {
-            result = getHighestPrice();
-        } else {
-            result = getMaximumVolume();
-        }
-        return result;
-    }
-
-    private float getHighestPrice() {
-        Double result = Double.MIN_VALUE;
-        List<Trend> trends = priceDataManager.getTrendMap(interval);
-        if (trends != null && trends.size() != 0) {
-            for (Trend trend : trends) {
-                if (trend.getHigh() > result) {
-                    result = trend.getHigh();
-                }
+    public void updateAdapter(int index) {
+        if (index == 0) {
+            MarketDepthFragment depthFragment = (MarketDepthFragment) fragments.get(0);
+            if (depthFragment != null) {
+                depthFragment.updateAdapter();
+            }
+        } else if (index == 1) {
+            MarketHistoryFragment historyFragment = (MarketHistoryFragment) fragments.get(1);
+            if (historyFragment != null) {
+                historyFragment.updateAdapter();
             }
         }
-        return result.floatValue() * 1.2f;
-    }
-
-    private float getLowestPrice() {
-        Double result = Double.MAX_VALUE;
-        List<Trend> trends = priceDataManager.getTrendMap(interval);
-        if (trends != null && trends.size() != 0) {
-            for (Trend trend : trends) {
-                if (trend.getLow() < result) {
-                    result = trend.getLow();
-                }
-            }
-        }
-        return result.floatValue() * 0.8f;
-    }
-
-    private float getMaximumVolume() {
-        Double result = Double.MIN_VALUE;
-        List<Trend> trends = priceDataManager.getTrendMap(interval);
-        if (trends != null && trends.size() != 0) {
-            for (Trend trend : trends) {
-                if (trend.getVol() > result) {
-                    result = trend.getVol();
-                }
-            }
-        }
-        return result.floatValue() * 1.2f;
     }
 
     private void setupButtons() {
@@ -257,8 +247,8 @@ public class MarketDetailActivity extends BaseActivity {
                 button1.getPaint().setFakeBoldText(true);
                 button1.setTextColor(getResources().getColor(R.color.colorWhite));
                 interval = TrendInterval.getByName(button1.getText().toString());
-                updateKLineChart();
-                updateBarChart();
+                presenter.updateKLineChart();
+                presenter.updateBarChart();
             });
         }
         btn1Day.getPaint().setFakeBoldText(true);
@@ -297,25 +287,7 @@ public class MarketDetailActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public void initData() {
-    }
-
-    private void updateChartLabel(Trend trend) {
-        tvOpen.setText(NumberUtils.format1(trend.getOpen(), 8));
-        tvClose.setText(NumberUtils.format1(trend.getClose(), 8));
-        tvHigh.setText(NumberUtils.format1(trend.getHigh(), 8));
-        tvLow.setText(NumberUtils.format1(trend.getLow(), 8));
-        tvVolume.setText(NumberUtils.format1(trend.getVol(), 2) + " ETH");
-        tvChange.setText(trend.getChange());
-        if (!StringUtils.isEmpty(trend.getChange()) && trend.getChange().contains("↑")) {
-            tvChange.setTextColor(getResources().getColor(R.color.colorRed));
-        } else {
-            tvChange.setTextColor(getResources().getColor(R.color.colorGreen));
-        }
-    }
-
-    private void updateTitleLabel() {
+    public void updateTitleLabel() {
         TradingPair pair = TradingPair.builder()
                 .tokenA(orderDataManager.getTokenA())
                 .tokenB(orderDataManager.getTokenB())
@@ -330,131 +302,6 @@ public class MarketDetailActivity extends BaseActivity {
         tv24Change.setText(ticker.getChange());
         tv24Volume.setText(NumberUtils.numberformat2(ticker.getVol()) + " ETH");
         tvMarketBalance.setText(ticker.getBalanceShown() + " " + orderDataManager.getTokenB() + " ≈ " + ticker.getCurrencyShown());
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void setupChart(CustomCandleChart chart, CandleData data) {
-        YAxis axisLeft = chart.getAxisLeft();
-        axisLeft.enableGridDashedLine(10f, 10f, 0f);
-        axisLeft.setGridColor(getResources().getColor(R.color.colorFortyWhite));
-        axisLeft.setGridLineWidth(0.5f);
-        axisLeft.setAxisMaximum(getMaximum(chart));
-        axisLeft.setAxisMinimum(getMinimum(chart));
-        axisLeft.setTextColor(getResources().getColor(R.color.colorFortyWhite));
-        axisLeft.setDrawGridLines(true);
-        axisLeft.setDrawAxisLine(false);
-        axisLeft.setDrawLabels(true);
-        axisLeft.setLabelCount(4);
-        chart.setMinOffset(0);
-        chart.getXAxis().setEnabled(false);
-        chart.getAxisRight().setEnabled(false);
-        chart.getLegend().setEnabled(false);
-        chart.setHighlightPerDragEnabled(true);
-        chart.setDoubleTapToZoomEnabled(false);
-        chart.getDescription().setEnabled(false);
-        chart.setScaleEnabled(false);
-        chart.setData(data);
-        chart.invalidate();
-        chart.setNoDataText("没有数据");
-        chart.setNoDataTextColor(Color.WHITE);
-        if (chart == kLineChart) {
-            MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view, priceDataManager.getTrendMap(interval));
-            mv.setChartView(chart);
-            chart.setMarker(mv);
-        }
-        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, Highlight h) {
-                llCandle.setVisibility(View.VISIBLE);
-                llMarket.setVisibility(View.GONE);
-                kLineChart.highlightValue(h.getX(), h.getDataSetIndex(), false);
-                barChart.highlightValue(h.getX(), h.getDataSetIndex(), false);
-                Trend trend = priceDataManager.getTrendMap(interval).get((int) h.getX());
-                updateChartLabel(trend);
-            }
-
-            @Override
-            public void onNothingSelected() {
-                llCandle.setVisibility(View.GONE);
-                llMarket.setVisibility(View.VISIBLE);
-                kLineChart.highlightValues(null);
-                barChart.highlightValues(null);
-            }
-        });
-    }
-
-    private void updateChart(CustomCandleChart chart, ArrayList<CandleEntry> values) {
-        CandleDataSet set1 = new CandleDataSet(values, "Data Set");
-        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set1.setDrawIcons(false);
-        set1.setShadowColorSameAsCandle(true);
-        set1.setShadowWidth(0.7f);
-        set1.setDrawValues(false);
-        set1.setDecreasingColor(getResources().getColor(R.color.colorGreen));
-        set1.setDecreasingPaintStyle(Paint.Style.FILL);
-        set1.setIncreasingColor(getResources().getColor(R.color.colorRed));
-        set1.setIncreasingPaintStyle(Paint.Style.FILL);
-        set1.setDrawHorizontalHighlightIndicator(false);
-        set1.setDrawVerticalHighlightIndicator(true);
-        set1.setNeutralColor(getResources().getColor(R.color.colorGreen));
-        set1.setHighLightColor(getResources().getColor(R.color.colorCenter));
-        set1.setHighlightLineWidth(1f);
-        CandleData data = new CandleData(set1);
-        setupChart(chart, data);
-    }
-
-    private void updateKLineChart() {
-        List<Trend> trends = priceDataManager.getTrendMap(interval);
-        ArrayList<CandleEntry> values = new ArrayList<>();
-        for (int i = 0; i < trends.size(); i++) {
-            Trend trend = trends.get(i);
-            values.add(new CandleEntry(
-                    i,
-                    trend.getHigh().floatValue(),
-                    trend.getLow().floatValue(),
-                    trend.getOpen().floatValue(),
-                    trend.getClose().floatValue()
-            ));
-        }
-        updateChart(kLineChart, values);
-    }
-
-    private void updateBarChart() {
-        List<Trend> trends = priceDataManager.getTrendMap(interval);
-        ArrayList<CandleEntry> values = new ArrayList<>();
-        for (int i = 0; i < trends.size(); i++) {
-            Trend trend = trends.get(i);
-            CandleEntry entry;
-            if (trend.getVol() == 0) {
-                entry = new CandleEntry(i, 0, 0, 0, 0);
-            } else if (trend.getChange().contains("↑")) {
-                entry = new CandleEntry(i, 0, trend.getVol().floatValue(), 0, trend.getVol().floatValue());
-            } else {
-                entry = new CandleEntry(i, trend.getVol().floatValue(), 0, trend.getVol().floatValue(), 0);
-            }
-            values.add(entry);
-        }
-        updateChart(barChart, values);
-    }
-
-    public void updateAdapter() {
-        updateTitleLabel();
-        updateKLineChart();
-        updateBarChart();
-    }
-
-    public void updateAdapter(int index) {
-        if (index == 0) {
-            MarketDepthFragment depthFragment = (MarketDepthFragment) fragments.get(0);
-            if (depthFragment != null) {
-                depthFragment.updateAdapter();
-            }
-        } else if (index == 1) {
-            MarketHistoryFragment historyFragment = (MarketHistoryFragment) fragments.get(1);
-            if (historyFragment != null) {
-                historyFragment.updateAdapter();
-            }
-        }
     }
 
     @OnClick({R.id.btn_buy, R.id.btn_sell})

@@ -79,6 +79,7 @@ public class MarketsFragment extends BaseFragment {
             orderManager.setTokenSell(ticker.getTradingPair().getTokenA());
             orderManager.setTokenBuy(ticker.getTradingPair().getTokenB());
             getOperation().forward(MarketDetailActivity.class);
+//            getOperation().forward(KchartActivity.class);
         });
     }
 
