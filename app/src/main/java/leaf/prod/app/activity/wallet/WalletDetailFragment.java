@@ -376,7 +376,7 @@ public class WalletDetailFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_receive:
-                getOperation().forward(ReceiveActivity.class);
+                getOperation().forward(FlutterReceiveActivity.class);
                 break;
             case R.id.btn_send:
                 getOperation().addParameter("symbol", symbol);

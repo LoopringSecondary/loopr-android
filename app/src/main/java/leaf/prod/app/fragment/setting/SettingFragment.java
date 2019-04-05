@@ -17,11 +17,19 @@ import android.widget.TextView;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.vondear.rxtool.view.RxToast;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.flutter.facade.Flutter;
+import io.flutter.plugin.common.BinaryMessenger;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.StringCodec;
+import io.flutter.view.FlutterView;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.ShareActivity;
 import leaf.prod.app.activity.setting.ContractVersionActivity;
@@ -199,11 +207,25 @@ public class SettingFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_flutter:  // Flutter
-                View flutterView = Flutter.createView(
+                FlutterView flutterView = Flutter.createView(
                         getActivity(),
                         getLifecycle(),
-                        "/"
+                        "qrCode"
                 );
+
+                new MethodChannel(flutterView, "qrCodeDisplay").setMethodCallHandler(
+                    new MethodChannel.MethodCallHandler() {
+                        @Override
+                        public void onMethodCall(MethodCall call, MethodChannel.Result result) {
+                            if (call.method.equals("qrCodeDisplay.get")) {
+                                String greetings = "hello";
+                                result.success(greetings);
+                            }
+                        }
+                    }
+                );
+
+                // Define layout for Flutter
                 DisplayMetrics metrics = new DisplayMetrics();
                 getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
                 FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels-60);
