@@ -41,8 +41,8 @@ import leaf.prod.app.activity.wallet.ActivityScanerCode;
 import leaf.prod.app.activity.wallet.AirdropActivity;
 import leaf.prod.app.activity.wallet.AuthorityWebActivity;
 import leaf.prod.app.activity.wallet.ContactListActivity;
+import leaf.prod.app.activity.wallet.FlutterReceiveActivity;
 import leaf.prod.app.activity.wallet.MainActivity;
-import leaf.prod.app.activity.wallet.ReceiveActivity;
 import leaf.prod.app.activity.wallet.SendActivity;
 import leaf.prod.app.activity.wallet.TokenListActivity;
 import leaf.prod.app.activity.wallet.WalletDetailActivity;
@@ -308,7 +308,7 @@ public class MainWalletFragment extends BaseFragment {
                     llMenu.setVisibility(View.GONE);
                     showMenu = false;
                 } else {
-                    getOperation().forward(ReceiveActivity.class);
+                    getOperation().forward(FlutterReceiveActivity.class);
                 }
                 break;
             case R.id.ll_send://send转出 按钮

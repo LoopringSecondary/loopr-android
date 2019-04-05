@@ -20,8 +20,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +38,10 @@ import com.vondear.rxtool.view.RxToast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.flutter.facade.Flutter;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.view.FlutterView;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.BaseActivity;
 import leaf.prod.app.views.TitleView;
@@ -53,30 +59,6 @@ public class FlutterReceiveActivity extends BaseActivity {
 
     @BindView(R.id.title)
     TitleView title;
-
-    @BindView(R.id.icon)
-    ImageView icon;
-
-    @BindView(R.id.iv_code)
-    ImageView ivCode;
-
-    @BindView(R.id.coin_address)
-    TextView coinAddress;
-
-    @BindView(R.id.btn_copy)
-    Button btnCopy;
-
-    @BindView(R.id.btn_save)
-    Button btnSave;
-
-    @BindView(R.id.app_name)
-    TextView appName;
-
-    @BindView(R.id.qrcode_image)
-    ImageView qrcodeImage;
-
-    @BindView(R.id.wallet_address)
-    TextView walletAddress;
 
     private UMShareListener umShareListener = new UMShareListener() {
         /**
@@ -143,41 +125,37 @@ public class FlutterReceiveActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        appName.setText(WalletUtil.getCurrentWallet(this).getWalletname());
-        coinAddress.setText(WalletUtil.getCurrentAddress(this));
+        String walletAddress = (WalletUtil.getCurrentAddress(this));
+
+        FlutterView flutterView = Flutter.createView(
+                this,
+                getLifecycle(),
+                "qrCode"
+        );
+
+        new MethodChannel(flutterView, "qrCodeDisplay").setMethodCallHandler(
+                new MethodChannel.MethodCallHandler() {
+                    @Override
+                    public void onMethodCall(MethodCall call, MethodChannel.Result result) {
+                        if (call.method.equals("qrCodeDisplay.get")) {
+                            String greetings = walletAddress;
+                            result.success(greetings);
+                        }
+                    }
+                }
+        );
+
+        // Define layout for Flutter
+        DisplayMetrics metrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels-260);
+        layout.topMargin = 260;
+        this.addContentView(flutterView, layout);
     }
 
     @Override
     public void initData() {
-        String str = WalletUtil.getCurrentAddress(this);
-        coinAddress.setText(str);
-        walletAddress.setText(str);
-        //二维码生成方式一  推荐此方法
-        RxQRCode.Builder builder = RxQRCode.builder(str).
-                backColor(0xFFFFFFFF).
-                codeColor(0xFF000000).
-                codeSide(600);
-        builder.into(ivCode);
-        builder.into(qrcodeImage);
-    }
 
-    @OnClick({R.id.btn_copy, R.id.btn_save})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_copy:
-                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                // 将文本内容放到系统剪贴板里。
-                cm.setText(coinAddress.getText());
-                RxToast.success(getResources().getString(R.string.copy_to_clipborad_success));
-                break;
-            case R.id.btn_save:
-                Bitmap bitmap = getBitmap(llShareView);
-                boolean result = saveChart(bitmap, llShareView.getMeasuredHeight(), llShareView.getMeasuredWidth());
-                if (result) {
-                    RxToast.success(getResources().getString(R.string.save_pic_success));
-                }
-                break;
-        }
     }
 
     // 单个权限
