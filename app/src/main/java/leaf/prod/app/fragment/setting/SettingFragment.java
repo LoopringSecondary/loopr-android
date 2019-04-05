@@ -202,7 +202,7 @@ public class SettingFragment extends BaseFragment {
                 View flutterView = Flutter.createView(
                         getActivity(),
                         getLifecycle(),
-                        "route1"
+                        "/"
                 );
                 DisplayMetrics metrics = new DisplayMetrics();
                 getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
