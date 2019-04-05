@@ -126,10 +126,6 @@
             android:exported="false"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".activity.wallet.ReceiveActivity"
-            android:exported="false"
-            android:launchMode="singleTask"/>
-        <activity
             android:name=".activity.wallet.TokenListActivity"
             android:exported="false"
             android:launchMode="singleTask"/>
@@ -292,6 +288,11 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.wallet.ContactListActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.wallet.FlutterReceiveActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
