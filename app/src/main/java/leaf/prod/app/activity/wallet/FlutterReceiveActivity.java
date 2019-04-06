@@ -130,7 +130,7 @@ public class FlutterReceiveActivity extends BaseActivity {
         FlutterView flutterView = Flutter.createView(
                 this,
                 getLifecycle(),
-                "qrCode"
+                "/qrCode"
         );
 
         new MethodChannel(flutterView, "qrCodeDisplay").setMethodCallHandler(
