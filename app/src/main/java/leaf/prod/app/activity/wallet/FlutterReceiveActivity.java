@@ -140,6 +140,17 @@ public class FlutterReceiveActivity extends BaseActivity {
                         if (call.method.equals("qrCodeDisplay.get")) {
                             String greetings = walletAddress;
                             result.success(greetings);
+                        } else if (call.method.equals("qrCodeDisplay.copyAdress")) {
+                            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            // 将文本内容放到系统剪贴板里。
+                            cm.setText(walletAddress);
+                            RxToast.success(getResources().getString(R.string.copy_to_clipborad_success));
+                        } else if (call.method.equals("qrCodeDisplay.saveToAlbum")) {
+                            Bitmap bitmap = getBitmap(llShareView);
+                            boolean saveChartResult = saveChart(bitmap, llShareView.getMeasuredHeight(), llShareView.getMeasuredWidth());
+                            if (saveChartResult) {
+                                RxToast.success(getResources().getString(R.string.save_pic_success));
+                            }
                         }
                     }
                 }
