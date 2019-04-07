@@ -206,7 +206,7 @@ public class SendActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_manager_wallet:
-                getOperation().forwardForResult(SendListChooseActivity.class, TOKEN_CODE);
+                getOperation().forwardForResult(FlutterSendListChooseActivity.class, TOKEN_CODE);
                 break;
             case R.id.iv_contact:
                 if (!(ButtonClickUtil.isFastDoubleClick(1))) { //防止一秒内多次点击

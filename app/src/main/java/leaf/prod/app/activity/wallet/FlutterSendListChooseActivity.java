@@ -29,7 +29,7 @@ import leaf.prod.walletsdk.model.NoDataType;
 import leaf.prod.walletsdk.model.response.relay.Token;
 import leaf.prod.walletsdk.util.SPUtils;
 
-public class SendListChooseActivity extends BaseActivity {
+public class FlutterSendListChooseActivity extends BaseActivity {
 
     @BindView(R.id.title)
     TitleView title;
@@ -56,6 +56,7 @@ public class SendListChooseActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO: update to Flutter
         setContentView(R.layout.activity_send_list);
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
@@ -86,7 +87,7 @@ public class SendListChooseActivity extends BaseActivity {
                 mAdapter.setNewData(listSearch);
                 mAdapter.setOnItemClickListener((adapter, view, position) -> {
                     String symbol = listSearch.get(position).getSymbol();
-                    SPUtils.put(SendListChooseActivity.this, "send_choose", symbol);
+                    SPUtils.put(FlutterSendListChooseActivity.this, "send_choose", symbol);
                     Intent intent = new Intent();
                     intent.putExtra("symbol", symbol);
                     setResult(1, intent);
@@ -115,6 +116,7 @@ public class SendListChooseActivity extends BaseActivity {
             emptyAdapter.refresh();
             title.hideRightImageButton();
         } else {
+            // List view
             mAdapter = new TokenChooseAdapter(R.layout.adapter_item_token_choose, list);
             recyclerView.setAdapter(mAdapter);
             mAdapter.setOnItemClickListener((adapter, view, position) -> {
