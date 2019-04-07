@@ -373,6 +373,7 @@
         android:layout_height="1dp"
         android:background="@color/lineBac"/>
 
+    <!-- share view -->
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ll_share_view"
         android:layout_width="375dp"
