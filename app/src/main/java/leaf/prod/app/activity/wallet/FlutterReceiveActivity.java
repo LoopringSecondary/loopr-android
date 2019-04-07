@@ -108,23 +108,9 @@ public class FlutterReceiveActivity extends BaseActivity {
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
         Config.DEBUG = true;
-    }
 
-    @Override
-    protected void initPresenter() {
-    }
-
-    @Override
-    public void initTitle() {
-        title.setBTitle(getResources().getString(R.string.receive_code));
-        title.clickLeftGoBack(getWContext());
-        title.setRightImageButton(R.mipmap.icon_share, button -> {
-            FlutterReceiveActivityPermissionsDispatcher.showWriteWithPermissionCheck(FlutterReceiveActivity.this);
-        });
-    }
-
-    @Override
-    public void initView() {
+        // TODO: You can see a delay when loading FlutterView
+        // This will be fixed when we have a better understanding of Flutter
         String walletAddress = (WalletUtil.getCurrentAddress(this));
 
         FlutterView flutterView = Flutter.createView(
@@ -165,7 +151,28 @@ public class FlutterReceiveActivity extends BaseActivity {
     }
 
     @Override
+    protected void initPresenter() {
+    }
+
+    @Override
+    public void initTitle() {
+        title.setBTitle(getResources().getString(R.string.receive_code));
+        title.clickLeftGoBack(getWContext());
+        title.setRightImageButton(R.mipmap.icon_share, button -> {
+            FlutterReceiveActivityPermissionsDispatcher.showWriteWithPermissionCheck(FlutterReceiveActivity.this);
+        });
+
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
     public void initData() {
+
 
     }
 
