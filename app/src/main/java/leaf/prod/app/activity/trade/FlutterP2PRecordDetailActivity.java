@@ -8,9 +8,14 @@ package leaf.prod.app.activity.trade;
 
 import java.text.NumberFormat;
 
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +23,10 @@ import com.vondear.rxtool.view.RxToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.flutter.facade.Flutter;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.view.FlutterView;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.BaseActivity;
 import leaf.prod.app.presenter.trade.P2PRecordDetailPresenter;
@@ -171,10 +180,12 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
+
     }
 
     @Override
     public void initData() {
+        // TODO: update once flutterView is ready
         if (order != null) {
             setOrderStatus();
             OriginOrder originOrder = order.getOriginOrder();
@@ -182,6 +193,33 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
                 setOverview(originOrder);
             }
         }
+
+        FlutterView flutterView = Flutter.createView(
+                this,
+                getLifecycle(),
+                "orderDetail"
+        );
+
+        new MethodChannel(flutterView, "orderDetail").setMethodCallHandler(
+                new MethodChannel.MethodCallHandler() {
+                    @Override
+                    public void onMethodCall(MethodCall call, MethodChannel.Result result) {
+                        if (call.method.equals("orderDetail.get")) {
+                            String greetings = "walletAddress";
+                            // This is to send data to Flutter
+                            result.success(greetings);
+                        }
+                    }
+                }
+        );
+
+        // Define layout for Flutter
+        DisplayMetrics metrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels-260);
+        layout.topMargin = 260;
+        this.addContentView(flutterView, layout);
+
     }
 
     private void setOverview(OriginOrder order) {
