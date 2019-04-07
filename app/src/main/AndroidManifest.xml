@@ -266,7 +266,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.trade.P2PRecordDetailActivity"
+            android:name=".activity.trade.FlutterP2PRecordDetailActivity"
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>

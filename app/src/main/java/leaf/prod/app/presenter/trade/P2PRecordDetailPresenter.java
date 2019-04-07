@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.vondear.rxtool.view.RxToast;
 
 import leaf.prod.app.R;
-import leaf.prod.app.activity.trade.P2PRecordDetailActivity;
+import leaf.prod.app.activity.trade.FlutterP2PRecordDetailActivity;
 import leaf.prod.app.presenter.BasePresenter;
 import leaf.prod.app.utils.QRCodeUitl;
 import leaf.prod.app.utils.ShareUtil;
@@ -22,13 +22,13 @@ import leaf.prod.app.utils.ShareUtil;
  * Time: 2018-12-07 11:57 AM
  * Cooperation: loopring.org 路印协议基金会
  */
-public class P2PRecordDetailPresenter extends BasePresenter<P2PRecordDetailActivity> {
+public class P2PRecordDetailPresenter extends BasePresenter<FlutterP2PRecordDetailActivity> {
 
     private AlertDialog shareDialog;
 
     private View dialogView;
 
-    public P2PRecordDetailPresenter(P2PRecordDetailActivity view, Context context) {
+    public P2PRecordDetailPresenter(FlutterP2PRecordDetailActivity view, Context context) {
         super(view, context);
     }
 

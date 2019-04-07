@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import leaf.prod.app.R;
 import leaf.prod.app.activity.BaseActivity;
-import leaf.prod.app.activity.trade.P2PRecordDetailActivity;
+import leaf.prod.app.activity.trade.FlutterP2PRecordDetailActivity;
 import leaf.prod.app.adapter.NoDataAdapter;
 import leaf.prod.app.adapter.market.MarketRecordAdapter;
 import leaf.prod.app.utils.LyqbLogger;
@@ -148,7 +148,7 @@ public class MarketRecordsActivity extends BaseActivity {
         setupListeners();
         recordAdapter.setOnItemClickListener((adapter, view, position) -> {
             getOperation().addParameter("order", orderList.get(position));
-            getOperation().forward(P2PRecordDetailActivity.class);
+            getOperation().forward(FlutterP2PRecordDetailActivity.class);
         });
         emptyAdapter = new NoDataAdapter(R.layout.adapter_item_no_data, null, NoDataType.market_order);
     }
@@ -159,7 +159,7 @@ public class MarketRecordsActivity extends BaseActivity {
             recordAdapter.setOnLoadMoreListener(() -> recordAdapter.loadMoreEnd(), recyclerView);
             recordAdapter.setOnItemClickListener((adapter, view, position) -> {
                 getOperation().addParameter("order", searchList.get(position));
-                getOperation().forward(P2PRecordDetailActivity.class);
+                getOperation().forward(FlutterP2PRecordDetailActivity.class);
             });
         } else {
             recordAdapter.setNewData(orderList);
@@ -172,7 +172,7 @@ public class MarketRecordsActivity extends BaseActivity {
             }, recyclerView);
             recordAdapter.setOnItemClickListener((adapter, view, position) -> {
                 getOperation().addParameter("order", orderList.get(position));
-                getOperation().forward(P2PRecordDetailActivity.class);
+                getOperation().forward(FlutterP2PRecordDetailActivity.class);
             });
         }
     }
