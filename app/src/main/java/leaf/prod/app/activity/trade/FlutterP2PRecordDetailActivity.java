@@ -36,8 +36,7 @@ import leaf.prod.walletsdk.util.DateUtil;
 import leaf.prod.walletsdk.util.NumberUtils;
 import leaf.prod.walletsdk.util.SPUtils;
 
-public class
-P2PRecordDetailActivity extends BaseActivity {
+public class FlutterP2PRecordDetailActivity extends BaseActivity {
 
     @BindView(R.id.title)
     public TitleView title;
@@ -131,6 +130,7 @@ P2PRecordDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO: Flutter
         setContentView(R.layout.activity_p2p_record_detail);
         ButterKnife.bind(this);
         tokenDataManager = TokenDataManager.getInstance(this);

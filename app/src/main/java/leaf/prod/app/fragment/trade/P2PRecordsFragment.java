@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import leaf.prod.app.R;
-import leaf.prod.app.activity.trade.P2PRecordDetailActivity;
+import leaf.prod.app.activity.trade.FlutterP2PRecordDetailActivity;
 import leaf.prod.app.adapter.NoDataAdapter;
 import leaf.prod.app.adapter.trade.P2PRecordAdapter;
 import leaf.prod.app.fragment.BaseFragment;
@@ -101,7 +101,7 @@ public class P2PRecordsFragment extends BaseFragment {
         }, recyclerView);
         recordAdapter.setOnItemClickListener((adapter, view, position) -> {
             getOperation().addParameter("order", orderList.get(position));
-            getOperation().forward(P2PRecordDetailActivity.class);
+            getOperation().forward(FlutterP2PRecordDetailActivity.class);
         });
         emptyAdapter = new NoDataAdapter(R.layout.adapter_item_no_data, null, NoDataType.p2p_order);
     }
