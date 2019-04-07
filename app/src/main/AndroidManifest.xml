@@ -203,8 +203,7 @@
             android:name=".activity.wallet.SendErrorActivity"
             android:exported="false"
             android:launchMode="singleTask"/>
-        <activity
-            android:name=".activity.wallet.SendListChooseActivity"
+        <activity android:name=".activity.wallet.FlutterSendListChooseActivity"
             android:exported="false"
             android:launchMode="singleTask"/>
         <activity
