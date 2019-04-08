@@ -38,6 +38,7 @@ import leaf.prod.walletsdk.manager.MarketOrderDataManager;
 import leaf.prod.walletsdk.manager.MarketPriceDataManager;
 import leaf.prod.walletsdk.manager.MarketcapDataManager;
 import leaf.prod.walletsdk.manager.TokenDataManager;
+import leaf.prod.walletsdk.model.MarketDepthItem;
 import leaf.prod.walletsdk.model.NoDataType;
 import leaf.prod.walletsdk.model.OriginOrder;
 import leaf.prod.walletsdk.model.Ticker;
@@ -204,7 +205,7 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
             this.sellPriceList = sellList;
             view.rvSell.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
             if (sellPriceList.size() > 0) {
-                sellAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, sellPriceList, "sell");
+                sellAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, getMarketDepthItemList(sellPriceList), "sell");
                 sellAdapter.setOnItemClickListener((adapter, view, position) -> {
                     String[] sell = sellPriceList.get(position);
                     if (sell != null && !sell[0].isEmpty()) {
@@ -219,10 +220,10 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
             }
         } else {
             if (sellList.size() > 0) {
-                for(String[] item : sellList) {
+                for (String[] item : sellList) {
                     Log.d("", item[0] + " " + item[1] + " " + item[2]);
                 }
-                sellAdapter.setNewData(sellList);
+                sellAdapter.setNewData(getMarketDepthItemList(sellList));
             }
         }
     }
@@ -232,7 +233,7 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
             this.buyPriceList = buyList;
             view.rvBuy.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
             if (buyPriceList.size() > 0) {
-                buyAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, buyPriceList, "buy");
+                buyAdapter = new MarketDepthAdapter(R.layout.adapter_item_market_depth_5, getMarketDepthItemList(buyPriceList), "buy");
                 buyAdapter.setOnItemClickListener((adapter, view, position) -> {
                     String[] buy = buyPriceList.get(position);
                     if (buy != null && !buy[0].isEmpty()) {
@@ -247,7 +248,7 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
             }
         } else {
             if (buyList.size() > 0) {
-                buyAdapter.setNewData(buyList);
+                buyAdapter.setNewData(getMarketDepthItemList(buyList));
             }
         }
     }
@@ -437,5 +438,13 @@ public class MarketTradePresenter extends BasePresenter<MarketTradeActivity2> {
                         view.hideProgress();
                     });
         }
+    }
+
+    private List<MarketDepthItem> getMarketDepthItemList(List<String[]> depths) {
+        List<MarketDepthItem> list = new ArrayList<>();
+        for (String[] depth : depths) {
+            list.add(MarketDepthItem.builder().depths(depth).rate(0).build());
+        }
+        return list;
     }
 }

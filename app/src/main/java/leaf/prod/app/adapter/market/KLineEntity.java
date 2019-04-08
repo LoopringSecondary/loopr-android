@@ -2,7 +2,7 @@ package leaf.prod.app.adapter.market;
 
 import java.util.Date;
 
-import com.github.tifezh.kchartlib.chart.entity.IKLine;
+import com.github.fujianlian.klinechart.entity.IKLine;
 
 import leaf.prod.walletsdk.model.Trend;
 import leaf.prod.walletsdk.util.DateUtil;
@@ -15,55 +15,57 @@ import leaf.prod.walletsdk.util.DateUtil;
  */
 public class KLineEntity implements IKLine {
 
-    private String Date;
+    public String Date;
 
-    private float Open;
+    public float Open;
 
-    private float High;
+    public float High;
 
-    private float Low;
+    public float Low;
 
-    private float Close;
+    public float Close;
 
-    private float Volume;
+    public float Volume;
 
-    private float MA5Price;
+    public float MA5Price;
 
-    private float MA10Price;
+    public float MA10Price;
 
-    private float MA20Price;
+    public float MA20Price;
 
-    private float dea;
+    public float MA30Price;
 
-    private float dif;
+    public float MA60Price;
 
-    private float macd;
+    public float dea;
 
-    private float k;
+    public float dif;
 
-    private float d;
+    public float macd;
 
-    private float j;
+    public float k;
 
-    private float rsi1;
+    public float d;
 
-    private float rsi2;
+    public float j;
 
-    private float rsi3;
+    public float r;
 
-    private float up;
+    public float rsi;
 
-    private float mb;
+    public float up;
 
-    private float dn;
+    public float mb;
 
-    private float MA5Volume;
+    public float dn;
 
-    private float MA10Volume;
+    public float MA5Volume;
+
+    public float MA10Volume;
 
     public static KLineEntity convert(Trend trend) {
         KLineEntity kLineEntity = new KLineEntity();
-        kLineEntity.setDate(DateUtil.formatDateDay(new Date(trend.getStart() * 1000)));
+        kLineEntity.setDate(DateUtil.tempDateMinute(new Date(trend.getStart() * 1000)));
         kLineEntity.setOpen(trend.getOpen().floatValue());
         kLineEntity.setHigh(trend.getHigh().floatValue());
         kLineEntity.setLow(trend.getLow().floatValue());
@@ -164,6 +166,16 @@ public class KLineEntity implements IKLine {
         return MA20Price;
     }
 
+    @Override
+    public float getMA30Price() {
+        return MA30Price;
+    }
+
+    @Override
+    public float getMA60Price() {
+        return MA60Price;
+    }
+
     public void setMA20Price(float MA20Price) {
         this.MA20Price = MA20Price;
     }
@@ -222,31 +234,20 @@ public class KLineEntity implements IKLine {
         this.j = j;
     }
 
-    @Override
-    public float getRsi1() {
-        return rsi1;
+    public void setMA30Price(float MA30Price) {
+        this.MA30Price = MA30Price;
     }
 
-    public void setRsi1(float rsi1) {
-        this.rsi1 = rsi1;
+    public void setMA60Price(float MA60Price) {
+        this.MA60Price = MA60Price;
     }
 
-    @Override
-    public float getRsi2() {
-        return rsi2;
+    public void setR(float r) {
+        this.r = r;
     }
 
-    public void setRsi2(float rsi2) {
-        this.rsi2 = rsi2;
-    }
-
-    @Override
-    public float getRsi3() {
-        return rsi3;
-    }
-
-    public void setRsi3(float rsi3) {
-        this.rsi3 = rsi3;
+    public void setRsi(float rsi) {
+        this.rsi = rsi;
     }
 
     @Override
@@ -306,20 +307,31 @@ public class KLineEntity implements IKLine {
                 ", MA5Price=" + MA5Price +
                 ", MA10Price=" + MA10Price +
                 ", MA20Price=" + MA20Price +
+                ", MA30Price=" + MA30Price +
+                ", MA60Price=" + MA60Price +
                 ", dea=" + dea +
                 ", dif=" + dif +
                 ", macd=" + macd +
                 ", k=" + k +
                 ", d=" + d +
                 ", j=" + j +
-                ", rsi1=" + rsi1 +
-                ", rsi2=" + rsi2 +
-                ", rsi3=" + rsi3 +
+                ", r=" + r +
+                ", rsi=" + rsi +
                 ", up=" + up +
                 ", mb=" + mb +
                 ", dn=" + dn +
                 ", MA5Volume=" + MA5Volume +
                 ", MA10Volume=" + MA10Volume +
                 '}';
+    }
+
+    @Override
+    public float getRsi() {
+        return 0;
+    }
+
+    @Override
+    public float getR() {
+        return 0;
     }
 }

@@ -1,10 +1,16 @@
 package leaf.prod.app.fragment.market;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +30,7 @@ import leaf.prod.app.fragment.BaseFragment;
 import leaf.prod.walletsdk.manager.MarketOrderDataManager;
 import leaf.prod.walletsdk.manager.MarketPriceDataManager;
 import leaf.prod.walletsdk.model.Language;
+import leaf.prod.walletsdk.model.MarketDepthItem;
 import leaf.prod.walletsdk.model.NoDataType;
 import leaf.prod.walletsdk.model.TradeType;
 import leaf.prod.walletsdk.util.LanguageUtil;
@@ -60,6 +67,23 @@ public class MarketDepthFragment extends BaseFragment {
     private Map<String, MarketDepthAdapter> adapters;
 
     private Map<String, RecyclerView> recyclerViews;
+
+    private boolean first = true;
+
+    private List<String[]> buyDepths, sellDepths = new ArrayList<>();
+
+    @SuppressLint("HandlerLeak")
+    public Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    updateDepths();
+                    break;
+            }
+        }
+    };
 
     @Nullable
     @Override
@@ -152,22 +176,98 @@ public class MarketDepthFragment extends BaseFragment {
     }
 
     public void updateAdapter() {
+        recyclerViews.get("buy").setAdapter(adapters.get("buy"));
+        recyclerViews.get("sell").setAdapter(adapters.get("sell"));
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.what = 0;
+                handler.sendMessage(message);
+            }
+        }, 0, 2000);
+    }
+
+    private void updateDepths() {
         if (adapters != null) {
-            for (Map.Entry<String, MarketDepthAdapter> item : adapters.entrySet()) {
-                if (item != null && item.getKey() != null && item.getValue() != null) {
-                    List<String[]> depths = manager.getDepths(item.getKey());
-                    if (depths == null || depths.size() == 0) {
-                        NoDataAdapter adapter = emptyAdapters.get(item.getKey());
-                        recyclerViews.get(item.getKey()).setAdapter(adapter);
-                        adapter.refresh();
-                    } else {
-                        MarketDepthAdapter adapter = item.getValue();
-                        recyclerViews.get(item.getKey()).setAdapter(adapter);
-                        adapter.setNewData(depths);
-                        adapter.notifyDataSetChanged();
-                    }
+            double max = 0;
+            if (first) {
+                first = false;
+                buyDepths = manager.getDepths("buy");
+                sellDepths = manager.getDepths("sell");
+            } else {
+                buyDepths = genData(buyDepths);
+                sellDepths = genData(sellDepths);
+            }
+            for (int i = 0; i < (buyDepths.size() > 10 ? 10 : buyDepths.size()); ++i) {
+                String[] depth = buyDepths.get(i);
+                if (depth != null && depth.length == 3 && !StringUtils.isEmpty(depth[1])) {
+                    max = Double.valueOf(depth[1]) > max ? Double.valueOf(depth[1]) : max;
                 }
             }
+            for (int i = 0; i < (sellDepths.size() > 10 ? 10 : sellDepths.size()); ++i) {
+                String[] depth = sellDepths.get(i);
+                if (depth != null && depth.length == 3 && !StringUtils.isEmpty(depth[1])) {
+                    max = Double.valueOf(depth[1]) > max ? Double.valueOf(depth[1]) : max;
+                }
+            }
+            if (buyDepths != null && buyDepths.size() > 0) {
+                MarketDepthAdapter adapter = adapters.get("buy");
+                adapter.setNewData(calculateRate(buyDepths.subList(0, 10), max));
+                adapter.notifyDataSetChanged();
+            }
+            if (sellDepths != null && sellDepths.size() > 0) {
+                MarketDepthAdapter adapter = adapters.get("sell");
+                adapter.setNewData(calculateRate(sellDepths.subList(0, 10), max));
+                adapter.notifyDataSetChanged();
+            }
+            //                    for (Map.Entry<String, MarketDepthAdapter> item : adapters.entrySet()) {
+            //                        if (item != null && item.getKey() != null && item.getValue() != null) {
+            //                            List<String[]> depths = manager.getDepths(item.getKey());
+            //                            if (depths != null && depths.size() != 0) {
+            //                                for (String[] depth : depths) {
+            //                                    if (depth != null && depth.length == 3 && !StringUtils.isEmpty(depth[1])) {
+            //                                        max = Double.valueOf(depth[1]) > max ? Double.valueOf(depth[1]) : max;
+            //                                    }
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                    for (Map.Entry<String, MarketDepthAdapter> item : adapters.entrySet()) {
+            //                        if (item != null && item.getKey() != null && item.getValue() != null) {
+            //                            List<String[]> depths = manager.getDepths(item.getKey());
+            //                            if (depths == null || depths.size() == 0) {
+            //                                NoDataAdapter adapter = emptyAdapters.get(item.getKey());
+            //                                recyclerViews.get(item.getKey()).setAdapter(adapter);
+            //                                adapter.refresh();
+            //                            } else {
+            //                                MarketDepthAdapter adapter = item.getValue();
+            //                                recyclerViews.get(item.getKey()).setAdapter(adapter);
+            //                                adapter.setNewData(calculateRate(depths, max));
+            //                                adapter.notifyDataSetChanged();
+            //                            }
+            //                        }
+            //                    }
         }
+    }
+
+    private List<String[]> genData(List<String[]> list) {
+        List<String[]> list1 = new ArrayList<>(list);
+        int step = (int) (Math.random() * 10);
+        for (int i = 0; i < step; ++i) {
+            if (list1.size() > 0) {
+                list1.add(0, new String[]{"0.0001", Math.random() * 10000 + "", ""});
+            }
+        }
+        return list1;
+    }
+
+    private List<MarketDepthItem> calculateRate(List<String[]> depths, double max) {
+        List<MarketDepthItem> list = new ArrayList<>();
+        for (String[] depth : depths) {
+            double rate = max != 0 && !StringUtils.isEmpty(depth[1]) ? Double.valueOf(depth[1]) / max : 0;
+            list.add(MarketDepthItem.builder().depths(depth).rate(rate).build());
+        }
+        return list;
     }
 }

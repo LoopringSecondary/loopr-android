@@ -76,6 +76,8 @@ public class DateUtil {
 
     private static SimpleDateFormat second = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
 
+    private static SimpleDateFormat minute = new SimpleDateFormat("yy-MM-dd hh:mm");
+
     private static SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
 
     private static SimpleDateFormat detailDay = new SimpleDateFormat("yyyy年MM月dd日");
@@ -83,6 +85,8 @@ public class DateUtil {
     private static SimpleDateFormat fileName = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
     private static SimpleDateFormat tempTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    private static SimpleDateFormat minuteTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     private static SimpleDateFormat excelDate = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -867,6 +871,16 @@ public class DateUtil {
      */
     public static String tempDateSecond(Date date) {
         return tempTime.format(date);
+    }
+
+    /**
+     * 格式化日期(精确到分)
+     *
+     * @param date
+     * @return
+     */
+    public static String tempDateMinute(Date date) {
+        return minuteTime.format(date);
     }
 
     /**

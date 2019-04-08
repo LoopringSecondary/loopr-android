@@ -52,6 +52,7 @@ import leaf.prod.walletsdk.manager.MarketPriceDataManager;
 import leaf.prod.walletsdk.manager.MarketcapDataManager;
 import leaf.prod.walletsdk.manager.TokenDataManager;
 import leaf.prod.walletsdk.model.Language;
+import leaf.prod.walletsdk.model.MarketDepthItem;
 import leaf.prod.walletsdk.model.NoDataType;
 import leaf.prod.walletsdk.model.OriginOrder;
 import leaf.prod.walletsdk.model.Ticker;
@@ -500,7 +501,7 @@ public class MarketTradeFragmentPresenter extends BasePresenter<MarketTradeFragm
                     adapter.refresh();
                 } else {
                     recyclerViews.get(item.getKey()).setAdapter(item.getValue());
-                    item.getValue().setNewData(depths);
+                    item.getValue().setNewData(getMarketDepthItemList(depths));
                     item.getValue().notifyDataSetChanged();
                 }
             }
@@ -608,5 +609,13 @@ public class MarketTradeFragmentPresenter extends BasePresenter<MarketTradeFragm
                         view.hideProgress();
                     });
         }
+    }
+
+    private List<MarketDepthItem> getMarketDepthItemList(List<String[]> depths) {
+        List<MarketDepthItem> list = new ArrayList<>();
+        for (String[] depth : depths) {
+            list.add(MarketDepthItem.builder().depths(depth).rate(0).build());
+        }
+        return list;
     }
 }

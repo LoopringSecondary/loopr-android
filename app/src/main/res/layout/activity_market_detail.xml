@@ -40,11 +40,11 @@
             <LinearLayout
                 android:id="@+id/ll_market_description"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="8dp"
-                android:background="@drawable/radius_bg_29"
+                android:background="@color/colorBg2"
                 android:orientation="vertical">
 
                 <TextView
@@ -313,83 +313,253 @@
                 android:background="@color/colorPrimary"
                 android:visibility="gone"/>
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margSide"
-                android:layout_marginEnd="@dimen/margSide"
-                android:orientation="horizontal">
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp">
 
-                <Button
-                    android:id="@+id/btn_1hr"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/ll_config"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorBg2"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/btn_time"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorBg2"
+                        android:text="时间"
+                        android:textColor="@color/colorNineText"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+
+                    <Button
+                        android:id="@+id/btn_config"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorBg2"
+                        android:text="更多"
+                        android:textColor="@color/colorNineText"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <com.github.fujianlian.klinechart.KLineChartView
+                    android:id="@+id/kLineChartView"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="10dp"
+                    app:kc_d_color="@color/colorRed"
+                    app:kc_grid_line_color="@color/colorBg2"
+                    app:kc_grid_line_width="0.8dp"
+                    app:kc_up_color="@color/colorGreen"
+                    app:layout_constraintTop_toBottomOf="@id/ll_config"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_time_select"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginTop="40dp"
                     android:background="@color/colorPrimary"
-                    android:text="1H"
-                    android:textColor="@color/colorFortyWhite"
-                    android:textColorHighlight="@color/colorFortyWhite"
-                    android:textSize="12sp"/>
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <Button
-                    android:id="@+id/btn_2hr"
-                    android:layout_width="0dp"
+                    <Button
+                        android:id="@+id/btn_1hr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="1H"
+                        android:textColor="@color/colorFortyWhite"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+
+                    <Button
+                        android:id="@+id/btn_2hr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="2H"
+                        android:textColor="@color/colorFortyWhite"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+
+                    <Button
+                        android:id="@+id/btn_4hr"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="4H"
+                        android:textColor="@color/colorFortyWhite"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+
+                    <Button
+                        android:id="@+id/btn_1day"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="1D"
+                        android:textColor="@color/colorWhite"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+
+                    <Button
+                        android:id="@+id/btn_1week"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:text="1W"
+                        android:textColor="@color/colorFortyWhite"
+                        android:textColorHighlight="@color/colorFortyWhite"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_indicator_select"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_marginTop="40dp"
                     android:background="@color/colorPrimary"
-                    android:text="2H"
-                    android:textColor="@color/colorFortyWhite"
-                    android:textColorHighlight="@color/colorFortyWhite"
-                    android:textSize="12sp"/>
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <Button
-                    android:id="@+id/btn_4hr"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="4H"
-                    android:textColor="@color/colorFortyWhite"
-                    android:textColorHighlight="@color/colorFortyWhite"
-                    android:textSize="12sp"/>
+                    <LinearLayout
+                        android:id="@+id/ll_sub_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_1day"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="1D"
-                    android:textColor="@color/colorFortyWhite"
-                    android:textColorHighlight="@color/colorFortyWhite"
-                    android:textSize="12sp"/>
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="主图"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="12sp"/>
 
-                <Button
-                    android:id="@+id/btn_1week"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:text="1W"
-                    android:textColor="@color/colorFortyWhite"
-                    android:textColorHighlight="@color/colorFortyWhite"
-                    android:textSize="12sp"/>
-            </LinearLayout>
+                        <Button
+                            android:id="@+id/btn_ma"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:background="@color/colorPrimary"
+                            android:text="MA"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHighlight="@color/colorFortyWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
 
-            <com.github.tifezh.kchartlib.chart.KChartView
-                android:id="@+id/kchart_view"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginStart="@dimen/margSide"
-                android:layout_marginEnd="@dimen/margSide"
-                app:kc_background_color="@color/colorPrimary"
-                app:kc_grid_line_width="0.8dp"
-                app:kc_grid_line_color="@color/colorBg2"
-                app:kc_up_color="@color/colorGreen"
-                app:kc_d_color="@color/colorRed"
-                app:kc_tab_background_color="@color/colorBg2"
-                app:kc_text_size="10sp">
-            </com.github.tifezh.kchartlib.chart.KChartView>
+                        <Button
+                            android:id="@+id/btn_boll"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:background="@color/colorPrimary"
+                            android:text="BOLL"
+                            android:textColor="@color/colorFortyWhite"
+                            android:textColorHighlight="@color/colorFortyWhite"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_main_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="副图"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="12sp"/>
+
+                        <Button
+                            android:id="@+id/btn_macd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="MACD"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHighlight="@color/colorFortyWhite"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+
+                        <Button
+                            android:id="@+id/btn_kdj"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="KDJ"
+                            android:textColor="@color/colorFortyWhite"
+                            android:textColorHighlight="@color/colorFortyWhite"
+                            android:textSize="12sp"/>
+
+                        <Button
+                            android:id="@+id/btn_rsi"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="RSI"
+                            android:textColor="@color/colorFortyWhite"
+                            android:textColorHighlight="@color/colorFortyWhite"
+                            android:textSize="12sp"/>
+
+                        <Button
+                            android:id="@+id/btn_wr"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="WR"
+                            android:textColor="@color/colorFortyWhite"
+                            android:textColorHighlight="@color/colorFortyWhite"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+
+            <!--<com.github.tifezh.kchartlib.chart.KChartView-->
+            <!--android:id="@+id/kchart_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="400dp"-->
+            <!--android:layout_marginStart="@dimen/margSide"-->
+            <!--android:layout_marginEnd="@dimen/margSide"-->
+            <!--android:visibility="gone"-->
+            <!--app:kc_background_color="@color/colorPrimary"-->
+            <!--app:kc_d_color="@color/colorRed"-->
+            <!--app:kc_grid_line_color="@color/colorBg2"-->
+            <!--app:kc_grid_line_width="0.8dp"-->
+            <!--app:kc_tab_background_color="@color/colorBg2"-->
+            <!--app:kc_text_size="10sp"-->
+            <!--app:kc_up_color="@color/colorGreen">-->
+            <!--</com.github.tifezh.kchartlib.chart.KChartView>-->
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/market_tab"
