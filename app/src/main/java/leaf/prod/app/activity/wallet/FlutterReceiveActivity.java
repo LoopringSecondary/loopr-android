@@ -124,9 +124,11 @@ public class FlutterReceiveActivity extends BaseActivity {
                     @Override
                     public void onMethodCall(MethodCall call, MethodChannel.Result result) {
                         if (call.method.equals("qrCodeDisplay.get")) {
+                            System.out.println("onMethodCall is called");
                             String greetings = walletAddress;
                             result.success(greetings);
-                        } else if (call.method.equals("qrCodeDisplay.copyAdress")) {
+                            System.out.println("onMethodCall is completed");
+                        } else if (call.method.equals("qrCodeDisplay.copyAddress")) {
                             ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                             // 将文本内容放到系统剪贴板里。
                             cm.setText(walletAddress);
@@ -148,6 +150,7 @@ public class FlutterReceiveActivity extends BaseActivity {
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(metrics.widthPixels, metrics.heightPixels-260);
         layout.topMargin = 260;
         this.addContentView(flutterView, layout);
+        System.out.println("flutterView is added...");
     }
 
     @Override
