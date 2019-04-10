@@ -36,7 +36,7 @@ public class FeeParams implements Serializable {
     @Expose(serialize = false, deserialize = false)
     private Double amountF;
 
-    @SerializedName(value = "tokenBFeePercentage")
+    @SerializedName(value = "tokenRecipient")
     private String tokenRecipient;
 
     @SerializedName(value = "tokenBFeePercentage")
