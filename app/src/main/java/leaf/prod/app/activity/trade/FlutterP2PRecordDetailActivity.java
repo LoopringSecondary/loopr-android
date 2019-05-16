@@ -7,6 +7,8 @@
 package leaf.prod.app.activity.trade;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -137,6 +139,10 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
 
     private MarketcapDataManager marketDataManager;
 
+    private String priceStr = "";
+
+    private String ratioStr = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO: Flutter
@@ -205,7 +211,23 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
                     @Override
                     public void onMethodCall(MethodCall call, MethodChannel.Result result) {
                         if (call.method.equals("orderDetail.get")) {
-                            String greetings = "walletAddress";
+
+                            String lrcFee = balanceDataManager.getFormattedBySymbol("LRC", order.getOriginOrder().getLrc());
+                            String lrcCurrency = marketDataManager.getCurrencyBySymbol("LRC", order.getOriginOrder().getLrc());
+                            String tvTradingFee = lrcFee + " LRC ≈ " + lrcCurrency;
+
+                            String validSince = DateUtil.formatDateTime(order.getOriginOrder().getValidS() * 1000L, "MM-dd HH:mm");
+                            String validUntil = DateUtil.formatDateTime(order.getOriginOrder().getValidU() * 1000L, "MM-dd HH:mm");
+                            String tvLiveTime = validSince + " ~ " + validUntil;
+
+                            List<Object> greetings = new ArrayList<Object>();
+                            greetings.add(setOrderStatus());
+                            greetings.add(priceStr);
+                            greetings.add(tvTradingFee);
+                            greetings.add(ratioStr);
+                            greetings.add(order.getOriginOrder().getHash());
+                            greetings.add(tvLiveTime);
+
                             // This is to send data to Flutter
                             result.success(greetings);
                         }
@@ -230,17 +252,14 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
         String currencyB = marketDataManager.getCurrencyBySymbol(order.getTokenB(), order.getAmountBuy());
         String currencyS = marketDataManager.getCurrencyBySymbol(order.getTokenS(), order.getAmountSell());
         Double price = order.getAmountSell() / order.getAmountBuy();
-        String priceStr = NumberUtils.format1(price, 6) + " " + order.getTokenS() + " / " + order.getTokenB();
-        String lrcFee = balanceDataManager.getFormattedBySymbol("LRC", order.getLrc());
-        String lrcCurrency = marketDataManager.getCurrencyBySymbol("LRC", order.getLrc());
+        priceStr = NumberUtils.format1(price, 6) + " " + order.getTokenS() + " / " + order.getTokenB();
+
         Double ratio = this.order.getDealtAmountSell() / order.getAmountSell();
         // Use NumberFormat
         NumberFormat formatter = NumberFormat.getPercentInstance();
         formatter.setMaximumFractionDigits(2);
         formatter.setMinimumFractionDigits(2);
-        String ratioStr = formatter.format(ratio);
-        String validSince = DateUtil.formatDateTime(order.getValidS() * 1000L, "MM-dd HH:mm");
-        String validUntil = DateUtil.formatDateTime(order.getValidU() * 1000L, "MM-dd HH:mm");
+        ratioStr = formatter.format(ratio);
 
         if (resourceB == 0) {
             ivTokenB.setVisibility(View.INVISIBLE);
@@ -268,13 +287,13 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
         tvPriceB.setText(currencyB);
         tvPriceS.setText(currencyS);
         tvPrice.setText(priceStr);
-        tvTradingFee.setText(lrcFee + " LRC ≈ " + lrcCurrency);
+
         tvFilled.setText(ratioStr);
         tvId.setText(order.getHash());
-        tvLiveTime.setText(validSince + " ~ " + validUntil);
+
         sellInfo.setText(amountS + " " + order.getTokenS());
         buyInfo.setText(amountB + " " + order.getTokenB());
-        tvValidUntil.setText(validUntil);
+
         double priceBuy = order.getAmountBuy() / order.getAmountSell();
         double priceSell = order.getAmountSell() / order.getAmountBuy();
         priceABuy.setText("1 " + order.getTokenB());
@@ -283,29 +302,38 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
         priceBBuy.setText(NumberUtils.format1(priceBuy, 4) + " " + order.getTokenB());
     }
 
-    private void setOrderStatus() {
+    private String setOrderStatus(){
+        String status = "";
         switch (order.getOrderStatus()) {
             case OPENED:
                 tvStatus.setText(OrderStatus.OPENED.getDescription(this));
+                status = OrderStatus.OPENED.getDescription(this);
                 break;
             case WAITED:
                 tvStatus.setText(OrderStatus.WAITED.getDescription(this));
+                status = OrderStatus.WAITED.getDescription(this);
                 break;
             case FINISHED:
                 tvStatus.setText(OrderStatus.FINISHED.getDescription(this));
+                status = OrderStatus.FINISHED.getDescription(this);
                 break;
             case CUTOFF:
                 tvStatus.setText(OrderStatus.CUTOFF.getDescription(this));
+                status = OrderStatus.CUTOFF.getDescription(this);
                 break;
             case CANCELLED:
                 tvStatus.setText(OrderStatus.CANCELLED.getDescription(this));
+                status = OrderStatus.CANCELLED.getDescription(this);
                 break;
             case EXPIRED:
                 tvStatus.setText(OrderStatus.EXPIRED.getDescription(this));
+                status = OrderStatus.EXPIRED.getDescription(this);
                 break;
             case LOCKED:
                 tvStatus.setText(OrderStatus.LOCKED.getDescription(this));
+                status = OrderStatus.LOCKED.getDescription(this);
                 break;
         }
+        return status;
     }
 }
