@@ -37,7 +37,7 @@
             <LinearLayout
                 android:id="@+id/ll_share"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -63,6 +63,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:alpha="0.4"
                         android:src="@mipmap/icon_next"/>
                 </LinearLayout>
 
@@ -76,13 +77,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/lineBac"/>
 
             <LinearLayout
                 android:id="@+id/ll_manager_wallet"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -108,6 +109,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:alpha="0.4"
                         android:src="@mipmap/icon_next"/>
                 </LinearLayout>
 
@@ -121,7 +123,7 @@
             <LinearLayout
                 android:id="@+id/ll_money_type"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -147,6 +149,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:alpha="0.4"
                         android:src="@mipmap/icon_next"/>
                 </LinearLayout>
 
@@ -160,7 +163,7 @@
             <LinearLayout
                 android:id="@+id/ll_language"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -186,6 +189,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:alpha="0.4"
                         android:src="@mipmap/icon_next"/>
                 </LinearLayout>
 
@@ -195,7 +199,7 @@
             <LinearLayout
                 android:id="@+id/ll_id_touch"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -246,13 +250,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/lineBac"/>
 
             <LinearLayout
                 android:id="@+id/ll_contract_version"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -278,6 +282,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:alpha="0.4"
                         android:src="@mipmap/icon_next"/>
                 </LinearLayout>
 
@@ -291,7 +296,7 @@
             <LinearLayout
                 android:id="@+id/ll_lrc_proportion"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">
@@ -317,6 +322,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:alpha="0.4"
                         android:src="@mipmap/icon_next"/>
                 </LinearLayout>
             </LinearLayout>
@@ -324,7 +330,7 @@
             <LinearLayout
                 android:id="@+id/ll_margin_split"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical"
@@ -364,14 +370,14 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/lineBac"/>
 
 
             <LinearLayout
                 android:id="@+id/ll_app_version"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/itemHeight"
+                android:layout_height="51dp"
                 android:background="@drawable/button_bg3_pressed"
                 android:clickable="true"
                 android:orientation="vertical">

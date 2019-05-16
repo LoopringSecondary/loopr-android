@@ -30,6 +30,6 @@
     <dimen name="mainTabText">12dp</dimen>  <!-- 首页tab——textview尺寸大小 -->
     <dimen name="normalText">16sp</dimen>  <!--  app正常字体大小 -->
     <dimen name="normal14Text">14sp</dimen>  <!--  app正常14字体大小 -->
-    <dimen name="itemHeight">45dp</dimen>  <!--  item高度 -->
+    <dimen name="itemHeight">51dp</dimen>  <!--  item高度 -->
 
 </resources>
