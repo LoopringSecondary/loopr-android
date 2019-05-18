@@ -82,24 +82,6 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
     @BindView(R.id.tv_buy_price)
     public TextView tvPriceB;
 
-    @BindView(R.id.tv_status)
-    public TextView tvStatus;
-
-    @BindView(R.id.tv_price)
-    public TextView tvPrice;
-
-    @BindView(R.id.tv_trading_fee)
-    public TextView tvTradingFee;
-
-    @BindView(R.id.tv_filled)
-    public TextView tvFilled;
-
-    @BindView(R.id.tv_id)
-    public TextView tvId;
-
-    @BindView(R.id.tv_live_time)
-    public TextView tvLiveTime;
-
     @BindView(R.id.ll_share_view)
     public ConstraintLayout shareView;
 
@@ -286,10 +268,6 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
         tvAmountS.setText(amountS);
         tvPriceB.setText(currencyB);
         tvPriceS.setText(currencyS);
-        tvPrice.setText(priceStr);
-
-        tvFilled.setText(ratioStr);
-        tvId.setText(order.getHash());
 
         sellInfo.setText(amountS + " " + order.getTokenS());
         buyInfo.setText(amountB + " " + order.getTokenB());
@@ -306,31 +284,24 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
         String status = "";
         switch (order.getOrderStatus()) {
             case OPENED:
-                tvStatus.setText(OrderStatus.OPENED.getDescription(this));
                 status = OrderStatus.OPENED.getDescription(this);
                 break;
             case WAITED:
-                tvStatus.setText(OrderStatus.WAITED.getDescription(this));
                 status = OrderStatus.WAITED.getDescription(this);
                 break;
             case FINISHED:
-                tvStatus.setText(OrderStatus.FINISHED.getDescription(this));
                 status = OrderStatus.FINISHED.getDescription(this);
                 break;
             case CUTOFF:
-                tvStatus.setText(OrderStatus.CUTOFF.getDescription(this));
                 status = OrderStatus.CUTOFF.getDescription(this);
                 break;
             case CANCELLED:
-                tvStatus.setText(OrderStatus.CANCELLED.getDescription(this));
                 status = OrderStatus.CANCELLED.getDescription(this);
                 break;
             case EXPIRED:
-                tvStatus.setText(OrderStatus.EXPIRED.getDescription(this));
                 status = OrderStatus.EXPIRED.getDescription(this);
                 break;
             case LOCKED:
-                tvStatus.setText(OrderStatus.LOCKED.getDescription(this));
                 status = OrderStatus.LOCKED.getDescription(this);
                 break;
         }
