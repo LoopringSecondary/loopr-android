@@ -351,6 +351,7 @@
         <attr name="hintBGPadding" format="dimension"/>
         <attr name="seekBarHeight" format="dimension"/>
         <attr name="thumbSize" format="dimension"/>
+        <!--
         <attr name="cellMode" format="enum">
             <enum name="number" value="0"/>
             <enum name="other" value="1"/>
@@ -359,6 +360,7 @@
             <enum name="single" value="1"/>
             <enum name="range" value="2"/>
         </attr>
+        -->
 
     </declare-styleable>
 
