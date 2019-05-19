@@ -235,10 +235,8 @@ public class ConvertUtils {
         } else if (drawable instanceof ColorDrawable) {
             //color
             Bitmap bitmap = Bitmap.createBitmap(32, 32, Bitmap.Config.ARGB_8888);
-            if (Build.VERSION.SDK_INT >= 11) {
-                Canvas canvas = new Canvas(bitmap);
-                canvas.drawColor(((ColorDrawable) drawable).getColor());
-            }
+            Canvas canvas = new Canvas(bitmap);
+            canvas.drawColor(((ColorDrawable) drawable).getColor());
             return bitmap;
         } else if (drawable instanceof NinePatchDrawable) {
             //.9.png
@@ -265,10 +263,8 @@ public class ConvertUtils {
         String path = uri.getPath();
         String scheme = uri.getScheme();
         String authority = uri.getAuthority();
-        //是否是4.4及以上版本
-        boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (DocumentsContract.isDocumentUri(context, uri)) {
             String docId = DocumentsContract.getDocumentId(uri);
             String[] split = docId.split(":");
             String type = split[0];

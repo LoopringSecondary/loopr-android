@@ -39,9 +39,6 @@ public class TopRoundSmartImageView extends SmartImageView {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        if (Build.VERSION.SDK_INT < 18) {
-            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
         corner = DpUtil.dp2Int(getContext(), 5);
     }
 

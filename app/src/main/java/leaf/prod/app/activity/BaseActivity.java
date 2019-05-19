@@ -110,17 +110,13 @@ public abstract class BaseActivity extends SwipeBackActivity {
     @Override
     public void finish() {
         super.finish();
-        if (android.os.Build.VERSION.SDK_INT >= 5) {
-            overridePendingTransition(R.anim.translate_between_interface_left_in, R.anim.translate_between_interface_right_out);
-        }
+        overridePendingTransition(R.anim.translate_between_interface_left_in, R.anim.translate_between_interface_right_out);
     }
 
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
-        if (android.os.Build.VERSION.SDK_INT >= 5) {
-            overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
-        }
+        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
     }
 
     /**
@@ -187,13 +183,11 @@ public abstract class BaseActivity extends SwipeBackActivity {
      */
     @SuppressLint("InlinedApi")
     private void setTranslucentStatus() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window win = getWindow();
-            WindowManager.LayoutParams winParams = win.getAttributes();
-            final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-            winParams.flags |= bits;
-            win.setAttributes(winParams);
-        }
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        winParams.flags |= bits;
+        win.setAttributes(winParams);
         SystemStatusManager tintManager = new SystemStatusManager(this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(0);// 状态栏无背景
