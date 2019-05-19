@@ -148,9 +148,7 @@ public class MyViewUtils {
      */
     @TargetApi(9)
     public static void disableOverScroll(AbsListView listView) {
-        if (Build.VERSION.SDK_INT >= 9) {// Build.VERSION_CODES.GINGERBREAD) {
-            listView.setOverScrollMode(2);// ListView.OVER_SCROLL_NEVER);
-        }
+        listView.setOverScrollMode(2);// ListView.OVER_SCROLL_NEVER);
     }
 
     /**
@@ -158,9 +156,7 @@ public class MyViewUtils {
      */
     @TargetApi(9)
     public static void disableOverScroll(ScrollView scrollView) {
-        if (Build.VERSION.SDK_INT >= 9) {// Build.VERSION_CODES.GINGERBREAD) {
-            scrollView.setOverScrollMode(2);// ScrollView.OVER_SCROLL_NEVER);
-        }
+        scrollView.setOverScrollMode(2);// ScrollView.OVER_SCROLL_NEVER);
     }
 
     /**

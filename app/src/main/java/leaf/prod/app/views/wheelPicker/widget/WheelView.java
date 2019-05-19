@@ -112,9 +112,7 @@ public class WheelView extends ScrollView {
         this.context = context;
         // 2015/12/15 去掉ScrollView的阴影
         setFadingEdgeLength(0);
-        if (Build.VERSION.SDK_INT >= 9) {
-            setOverScrollMode(OVER_SCROLL_NEVER);
-        }
+        setOverScrollMode(OVER_SCROLL_NEVER);
         setVerticalScrollBarEnabled(false);
         views = new LinearLayout(context);
         views.setOrientation(LinearLayout.VERTICAL);

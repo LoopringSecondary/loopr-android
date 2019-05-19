@@ -60,15 +60,9 @@ public class SwipeBackUtils {
             //                    translucentConversionListenerClazz);
             //            method.setAccessible(true);
             //            method.invoke(activity, new Object[] {null });
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-                Method method = Activity.class.getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz);
-                method.setAccessible(true);
-                method.invoke(activity, new Object[]{null});
-            } else {
-                Method method = Activity.class.getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz, ActivityOptions.class);
-                method.setAccessible(true);
-                method.invoke(activity, null, null);
-            }
+            Method method = Activity.class.getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz, ActivityOptions.class);
+            method.setAccessible(true);
+            method.invoke(activity, null, null);
         } catch (Throwable t) {
         }
     }

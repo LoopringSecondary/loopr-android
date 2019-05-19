@@ -60,8 +60,6 @@
                 android:id="@+id/wallet_qrcode"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="70dp"
                 android:src="@mipmap/icon_wallet_qrcode"/>

@@ -96,7 +96,8 @@ dependencies {
     implementation 'com.orhanobut:logger:2.1.1'
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.airbnb.android:lottie:1.0.1'
+    // Airbnb Lottie
+    implementation 'com.airbnb.android:lottie:2.5.5'
     //适配器
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
     //md对话框

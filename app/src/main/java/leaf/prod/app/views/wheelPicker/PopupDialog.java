@@ -37,9 +37,6 @@ class PopupDialog {
         contentLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         contentLayout.setFocusable(true);
         contentLayout.setFocusableInTouchMode(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            //contentLayout.setFitsSystemWindows(true);
-        }
         dialog = new Dialog(context);
         dialog.setCanceledOnTouchOutside(true);//触摸屏幕取消窗体
         dialog.setCancelable(true);//按返回键取消窗体
