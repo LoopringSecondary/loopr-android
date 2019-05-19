@@ -1022,7 +1022,7 @@ public class DateUtil {
      */
     public String getNowDayOffset(int offset) {
         Calendar m_Calendar = Calendar.getInstance();
-        long time = (long) m_Calendar.getTimeInMillis();
+        long time = m_Calendar.getTimeInMillis();
         time = time + offset * 24 * 3600 * 1000;
         Date myDate = new Date(time);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -1137,10 +1137,7 @@ public class DateUtil {
     public boolean isLeapYear(int year) {
         if (year % 400 == 0) {
             return true;
-        } else if (year % 100 != 0 && year % 4 == 0) {
-            return true;
-        }
-        return false;
+        } else return year % 100 != 0 && year % 4 == 0;
     }
 
     /**
@@ -1218,8 +1215,6 @@ public class DateUtil {
             return false;
         if (c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH))
             return false;
-        if (c1.get(Calendar.DAY_OF_MONTH) != c2.get(Calendar.DAY_OF_MONTH))
-            return false;
-        return true;
+        return c1.get(Calendar.DAY_OF_MONTH) == c2.get(Calendar.DAY_OF_MONTH);
     }
 }

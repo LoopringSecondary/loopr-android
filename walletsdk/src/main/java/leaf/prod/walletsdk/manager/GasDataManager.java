@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -66,7 +67,7 @@ public class GasDataManager {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            parseJsonString(new String(buffer, "UTF-8"));
+            parseJsonString(new String(buffer, StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }

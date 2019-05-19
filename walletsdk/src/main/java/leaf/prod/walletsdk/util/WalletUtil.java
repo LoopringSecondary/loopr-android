@@ -143,9 +143,7 @@ public class WalletUtil {
 
     public static boolean needPassword(Context context) {
         WalletEntity walletEntity = getCurrentWallet(context);
-        if (walletEntity.getWalletType() != ImportWalletType.MNEMONIC || !StringUtils.isEmpty(walletEntity.getPas()))
-            return true;
-        return false;
+        return walletEntity.getWalletType() != ImportWalletType.MNEMONIC || !StringUtils.isEmpty(walletEntity.getPas());
     }
 
     public static Credentials getCredential(Context context, String password) throws IOException, JSONException, InvalidKeystoreException, IllegalCredentialException {

@@ -3,6 +3,7 @@ package leaf.prod.walletsdk.util;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,11 +73,7 @@ public class SPUtils {
                 return defaultObject;
             } else {
                 String decodeString = null;
-                try {
-                    decodeString = new String(MyBase64.decode(str), "utf-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                decodeString = new String(MyBase64.decode(str), StandardCharsets.UTF_8);
                 //			return sp.getString(key, (String) defaultObject);
                 return decodeString;
             }

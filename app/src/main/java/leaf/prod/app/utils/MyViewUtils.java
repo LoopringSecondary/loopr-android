@@ -477,10 +477,7 @@ public class MyViewUtils {
         String limitEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Pattern pattern = Pattern.compile(limitEx);
         Matcher m = pattern.matcher(str);
-        if (m.find()) {
-            return true;
-        }
-        return false;
+        return m.find();
     }
 
     /**

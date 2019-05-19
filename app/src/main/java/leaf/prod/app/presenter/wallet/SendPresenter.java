@@ -519,10 +519,8 @@ public class SendPresenter extends BasePresenter<SendActivity> {
     public boolean clickInView(Point point, View view) {
         int[] location = new int[2];
         view.getLocationInWindow(location);
-        if (point.x >= location[0] && point.x <= location[0] + view.getWidth() &&
-                point.y >= location[1] && point.y <= location[1] + view.getHeight())
-            return true;
-        return false;
+        return point.x >= location[0] && point.x <= location[0] + view.getWidth() &&
+                point.y >= location[1] && point.y <= location[1] + view.getHeight();
     }
 
     private void showKeyboard(View view, boolean show) {

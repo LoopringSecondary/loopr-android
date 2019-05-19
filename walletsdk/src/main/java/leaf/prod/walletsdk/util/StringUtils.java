@@ -365,7 +365,7 @@ public final class StringUtils {
         int pos = 0;  // our position in the old string
         int patLen = oldPattern.length();
         while (index >= 0) {
-            sb.append(inString.substring(pos, index));
+            sb.append(inString, pos, index);
             sb.append(newPattern);
             pos = index + patLen;
             index = inString.indexOf(oldPattern, pos);

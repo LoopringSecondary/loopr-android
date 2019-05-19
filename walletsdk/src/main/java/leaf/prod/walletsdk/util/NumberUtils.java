@@ -201,11 +201,7 @@ public class NumberUtils {
         if (a.length == 1) {
             return true;
         } else {
-            if (Integer.valueOf(a[1]) == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return Integer.valueOf(a[1]) == 0;
         }
     }
 
