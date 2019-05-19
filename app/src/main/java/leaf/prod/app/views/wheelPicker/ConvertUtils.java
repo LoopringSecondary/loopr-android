@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -436,7 +437,7 @@ public class ConvertUtils {
 
     public static String toGbk(String str) {
         try {
-            return new String(str.getBytes("utf-8"), "gbk");
+            return new String(str.getBytes(StandardCharsets.UTF_8), "gbk");
         } catch (UnsupportedEncodingException e) {
             LogUtils.warn(e.getMessage());
             return str;
