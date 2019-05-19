@@ -178,8 +178,8 @@ public class RangeSeekBar extends View {
         mSeekBarHeight = (int) t.getDimension(R.styleable.RangeSeekBar_seekBarHeight, dp2px(context, 2));
         mHintBGPadding = (int) t.getDimension(R.styleable.RangeSeekBar_hintBGPadding, 0);
         mThumbSize = (int) t.getDimension(R.styleable.RangeSeekBar_thumbSize, dp2px(context, 26));
-        mCellMode = t.getInt(R.styleable.RangeSeekBar_cellMode, 0);
-        mSeekBarMode = t.getInt(R.styleable.RangeSeekBar_seekBarMode, 2);
+        mCellMode = 0;  // t.getInt(R.styleable.RangeSeekBar_cellMode, 0);
+        mSeekBarMode = 2;  // t.getInt(R.styleable.RangeSeekBar_seekBarMode, 2);
         if (mSeekBarMode == 2) {
             leftSB = new SeekBar(-1);
             rightSB = new SeekBar(1);
