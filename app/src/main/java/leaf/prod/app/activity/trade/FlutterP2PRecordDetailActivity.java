@@ -127,7 +127,6 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO: Flutter
         setContentView(R.layout.activity_p2p_record_detail);
         ButterKnife.bind(this);
         tokenDataManager = TokenDataManager.getInstance(this);
@@ -173,7 +172,7 @@ public class FlutterP2PRecordDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        // TODO: update once flutterView is ready
+        // Update once flutterView is ready
         if (order != null) {
             setOrderStatus();
             OriginOrder originOrder = order.getOriginOrder();
