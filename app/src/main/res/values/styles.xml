@@ -283,7 +283,6 @@
         <item name="android:layout_marginLeft">20dp</item>
     </style>
 
-
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!--<item name="android:windowFrame">@null</item>&lt;!&ndash;边框&ndash;&gt;-->
         <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
@@ -314,6 +313,6 @@
     </style>
 
     <style name="s_false" parent="@android:style/TextAppearance.Small">
-        <item name="android:textColor">@color/background_dark</item>
+        <item name="android:textColor">@color/colorGreen</item>
     </style>
 </resources>

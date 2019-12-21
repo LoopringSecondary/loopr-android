@@ -12,7 +12,7 @@ import java.util.Objects;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
@@ -169,7 +169,7 @@ public class SendPresenter extends BasePresenter<SendActivity> {
      */
     public void showConfirmDialog() {
         if (confirmDialog == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);//
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);//
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_send_confirm, null);
             builder.setView(view);
             payAmount = view.findViewById(R.id.pay_amount);
@@ -204,7 +204,7 @@ public class SendPresenter extends BasePresenter<SendActivity> {
     public void showFeeDialog() {
         showKeyboard(view.moneyAmount, false);
         if (feeDialog == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);//
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);//
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_fee, null);
             builder.setView(view);
             tvAmount = view.findViewById(R.id.tv_amount);

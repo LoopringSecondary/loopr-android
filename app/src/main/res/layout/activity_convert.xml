@@ -11,7 +11,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.ConstraintLayout
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -69,9 +69,9 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/first_token_img1"/>
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -105,7 +105,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/second_token_img1"/>
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.ConstraintLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -217,7 +217,7 @@
                 android:layout_weight="1"
                 android:text="@string/available_balance"
                 android:textColor="@color/colorNineText"
-                android:textSize="@dimen/text_11"/>
+                android:textSize="@dimen/font_12"/>
 
             <TextView
                 android:id="@+id/max"
@@ -226,7 +226,7 @@
                 android:gravity="right|center_vertical"
                 android:text="@string/max"
                 android:textColor="@color/colorCenter"
-                android:textSize="@dimen/text_11"/>
+                android:textSize="@dimen/font_12"/>
         </LinearLayout>
 
         <LinearLayout
@@ -293,7 +293,7 @@
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

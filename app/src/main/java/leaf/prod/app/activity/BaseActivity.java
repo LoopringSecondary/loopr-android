@@ -158,7 +158,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
             networkDialogMap = new HashMap<>();
         }
         if (networkDialogMap.get(key) == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this, R.style.TopHintDialog);
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this, R.style.TopHintDialog);
             View view = LayoutInflater.from(this).inflate(R.layout.dialog_network_status, null);
             builder.setView(view);
             Dialog networkDialog = builder.create();

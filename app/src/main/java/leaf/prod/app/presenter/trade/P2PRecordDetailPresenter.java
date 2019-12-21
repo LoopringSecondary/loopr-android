@@ -2,7 +2,7 @@ package leaf.prod.app.presenter.trade;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +34,7 @@ public class P2PRecordDetailPresenter extends BasePresenter<P2PRecordDetailActiv
 
     public void showShareDialog(String qrCode) {
         if (shareDialog == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);
             dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_p2p_share, null);
             Bitmap bitmap = QRCodeUitl.createQRCodeBitmap(qrCode, 300);
             ((ImageView) dialogView.findViewById(R.id.iv_qr_code)).setImageBitmap(bitmap);

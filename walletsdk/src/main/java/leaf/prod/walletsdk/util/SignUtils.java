@@ -35,7 +35,6 @@ public class SignUtils {
         return NotifyScanParam.SignParam.builder().timestamp(timeStamp).owner(owner)
                 .r(Numeric.toHexStringNoPrefix(sig.getR()))
                 .s(Numeric.toHexStringNoPrefix(sig.getS()))
-                .v(BigInteger.valueOf(sig.getV()))
-                .build();
+                .v(BigInteger.valueOf(1L)).build();
     }
 }

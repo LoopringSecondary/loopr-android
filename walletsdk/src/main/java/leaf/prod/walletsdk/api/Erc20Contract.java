@@ -79,7 +79,7 @@ public class Erc20Contract extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
                 }, new TypeReference<Address>() {
                 }),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.<TypeReference<?>>singletonList(new TypeReference<Uint256>() {
                 }));
         List<EventValuesWithLog> valueList = extractEventParametersWithLog(event, transactionReceipt);
         ArrayList<ApprovalEventResponse> responses = new ArrayList<ApprovalEventResponse>(valueList.size());
@@ -99,7 +99,7 @@ public class Erc20Contract extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
                 }, new TypeReference<Address>() {
                 }),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.<TypeReference<?>>singletonList(new TypeReference<Uint256>() {
                 }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
@@ -122,7 +122,7 @@ public class Erc20Contract extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
                 }, new TypeReference<Address>() {
                 }),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.<TypeReference<?>>singletonList(new TypeReference<Uint256>() {
                 }));
         List<EventValuesWithLog> valueList = extractEventParametersWithLog(event, transactionReceipt);
         ArrayList<TransferEventResponse> responses = new ArrayList<TransferEventResponse>(valueList.size());
@@ -142,7 +142,7 @@ public class Erc20Contract extends Contract {
                 Arrays.<TypeReference<?>>asList(new TypeReference<Address>() {
                 }, new TypeReference<Address>() {
                 }),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.<TypeReference<?>>singletonList(new TypeReference<Uint256>() {
                 }));
         EthFilter filter = new EthFilter(startBlock, endBlock, getContractAddress());
         filter.addSingleTopic(EventEncoder.encode(event));
@@ -162,8 +162,8 @@ public class Erc20Contract extends Contract {
 
     public RemoteCall<String> name() {
         final Function function = new Function("name",
-                Arrays.<Type>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {
+                Collections.emptyList(),
+                Collections.singletonList(new TypeReference<Utf8String>() {
                 }));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
@@ -171,16 +171,16 @@ public class Erc20Contract extends Contract {
     public RemoteCall<TransactionReceipt> approve(String _spender, BigInteger _value) {
         final Function function = new Function(
                 "approve",
-                Arrays.<Type>asList(new Address(_spender),
+                Arrays.asList(new Address(_spender),
                         new Uint256(_value)),
-                Collections.<TypeReference<?>>emptyList());
+                Collections.emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteCall<BigInteger> totalSupply() {
         final Function function = new Function("totalSupply",
-                Arrays.<Type>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.emptyList(),
+                Collections.singletonList(new TypeReference<Uint256>() {
                 }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
@@ -188,33 +188,33 @@ public class Erc20Contract extends Contract {
     public RemoteCall<TransactionReceipt> transferFrom(String _from, String _to, BigInteger _value) {
         final Function function = new Function(
                 "transferFrom",
-                Arrays.<Type>asList(new Address(_from),
+                Arrays.asList(new Address(_from),
                         new Address(_to),
                         new Uint256(_value)),
-                Collections.<TypeReference<?>>emptyList());
+                Collections.emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteCall<BigInteger> decimals() {
         final Function function = new Function("decimals",
-                Arrays.<Type>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint8>() {
+                Collections.emptyList(),
+                Collections.singletonList(new TypeReference<Uint8>() {
                 }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteCall<BigInteger> balanceOf(String _owner) {
         final Function function = new Function("balanceOf",
-                Arrays.<Type>asList(new Address(_owner)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.singletonList(new Address(_owner)),
+                Collections.singletonList(new TypeReference<Uint256>() {
                 }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
 
     public RemoteCall<String> symbol() {
         final Function function = new Function("symbol",
-                Arrays.<Type>asList(),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Utf8String>() {
+                Collections.emptyList(),
+                Collections.singletonList(new TypeReference<Utf8String>() {
                 }));
         return executeRemoteCallSingleValueReturn(function, String.class);
     }
@@ -222,17 +222,17 @@ public class Erc20Contract extends Contract {
     public RemoteCall<TransactionReceipt> transfer(String _to, BigInteger _value) {
         final Function function = new Function(
                 "transfer",
-                Arrays.<Type>asList(new Address(_to),
+                Arrays.asList(new Address(_to),
                         new Uint256(_value)),
-                Collections.<TypeReference<?>>emptyList());
+                Collections.emptyList());
         return executeRemoteCallTransaction(function);
     }
 
     public RemoteCall<BigInteger> allowance(String _owner, String _spender) {
         final Function function = new Function("allowance",
-                Arrays.<Type>asList(new Address(_owner),
+                Arrays.asList(new Address(_owner),
                         new Address(_spender)),
-                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {
+                Collections.singletonList(new TypeReference<Uint256>() {
                 }));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }

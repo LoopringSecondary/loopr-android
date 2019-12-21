@@ -51,7 +51,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -70,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="40dp"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.appcompat.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -110,5 +110,5 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"/>
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.ConstraintLayout>
 </LinearLayout>

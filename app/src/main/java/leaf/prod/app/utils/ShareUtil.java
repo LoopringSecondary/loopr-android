@@ -14,7 +14,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Environment;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.ConstraintLayout;
 
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;

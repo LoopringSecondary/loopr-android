@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PagerSnapHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.widget.LinearLayoutManager;
+import androidx.appcompat.widget.PagerSnapHelper;
+import androidx.appcompat.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AnimationUtils;

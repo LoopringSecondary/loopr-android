@@ -7,7 +7,7 @@
 package leaf.prod.app.activity.wallet;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.ConstraintLayout;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;

@@ -17,7 +17,7 @@
         android:orientation="vertical"/>
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.ConstraintLayout
         android:id="@+id/ll_share_view"
         android:layout_width="375dp"
         android:layout_height="670dp"
@@ -80,7 +80,7 @@
                     android:id="@+id/sell_info"
                     android:text="0.000001 WETH"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/background_dark"
+                    android:textColor="@color/colorBg2"
                     android:textSize="10sp"/>
             </TableRow>
 
@@ -95,7 +95,7 @@
                     android:id="@+id/buy_info"
                     android:text="100 LRC"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/background_dark"
+                    android:textColor="@color/colorBg2"
                     android:textSize="10sp"/>
             </TableRow>
 
@@ -110,7 +110,7 @@
                     android:id="@+id/valid_until"
                     android:text="12-05 17:14"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/background_dark"
+                    android:textColor="@color/colorBg2"
                     android:textSize="10sp"/>
             </TableRow>
 
@@ -140,7 +140,7 @@
                         android:layout_height="match_parent"
                         android:text="100000 LRC"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/background_dark"
+                        android:textColor="@color/colorBg2"
                         android:textSize="10sp"/>
                 </LinearLayout>
             </TableRow>
@@ -171,7 +171,7 @@
                         android:layout_height="match_parent"
                         android:text="0.000001 WETH"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/background_dark"
+                        android:textColor="@color/colorBg2"
                         android:textSize="10sp"/>
                 </LinearLayout>
             </TableRow>
@@ -221,5 +221,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.ConstraintLayout>
 </LinearLayout>

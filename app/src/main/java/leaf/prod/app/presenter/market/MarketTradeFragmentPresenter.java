@@ -18,9 +18,9 @@ import java.util.Objects;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.LinearLayoutManager;
+import androidx.appcompat.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -400,7 +400,7 @@ public class MarketTradeFragmentPresenter extends BasePresenter<MarketTradeFragm
 
     private void setupPriceDialog() {
         if (marketPriceDialog == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);
             marketPriceDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_market_order, null);
             RecyclerView recyclerViewBuy = marketPriceDialogView.findViewById(R.id.recycler_view_buy);
             RecyclerView recyclerViewSell = marketPriceDialogView.findViewById(R.id.recycler_view_sell);

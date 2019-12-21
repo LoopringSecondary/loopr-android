@@ -62,7 +62,7 @@
                 android:text="WETH"
                 android:layout_gravity="bottom"
                 android:textColor="@color/colorNineText"
-                android:textSize="@dimen/text_11"/>
+                android:textSize="@dimen/font_12"/>
 
         </LinearLayout>
 

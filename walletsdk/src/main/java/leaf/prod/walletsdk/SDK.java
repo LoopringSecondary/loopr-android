@@ -4,7 +4,6 @@ import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
 
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.Web3jFactory;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.ChainId;
 
@@ -64,7 +63,7 @@ public class SDK {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .build();
         HttpService httpService = new HttpService(ETH_BASE);
-        web3j = Web3jFactory.build(httpService);
+        web3j = Web3j.build(httpService);
         IO.Options opt = new IO.Options();
         opt.reconnection = true;
         opt.reconnectionAttempts = 5;

@@ -3,7 +3,7 @@ package leaf.prod.app.presenter.market;
 import java.util.List;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import androidx.core.app.Fragment;
 
 import leaf.prod.app.activity.market.MarketSelectActivity;
 import leaf.prod.app.fragment.market.MarketSelectFragment;

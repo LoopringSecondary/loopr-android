@@ -11,10 +11,10 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.ConstraintLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.core.app.Fragment;
+import androidx.core.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;

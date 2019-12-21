@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:text="3小时前"
                         android:textColor="@color/colorNineText"
-                        android:textSize="@dimen/text_11"/>
+                        android:textSize="@dimen/font_12"/>
 
                     <TextView
                         android:id="@+id/tv_source"
@@ -67,7 +67,7 @@
                         android:layout_marginStart="@dimen/margSide"
                         android:text="来源: 金色财经"
                         android:textColor="@color/colorNineText"
-                        android:textSize="@dimen/text_11"/>
+                        android:textSize="@dimen/font_12"/>
                 </LinearLayout>
 
                 <LinearLayout

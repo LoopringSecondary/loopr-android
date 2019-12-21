@@ -46,7 +46,7 @@
                 android:gravity="center"
                 android:text="WETH"
                 android:textColor="@color/colorNineText"
-                android:textSize="@dimen/text_11"/>
+                android:textSize="@dimen/font_12"/>
 
             <TextView
                 android:id="@+id/tv_sell_icon"

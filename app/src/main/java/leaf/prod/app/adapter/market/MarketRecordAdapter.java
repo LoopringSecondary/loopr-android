@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -39,7 +38,7 @@ public class MarketRecordAdapter extends BaseQuickAdapter<Order, BaseViewHolder>
 
     private MarketOrderDataManager marketOrderDataManager;
 
-    public MarketRecordAdapter(int layoutResId, @Nullable List<Order> data, MarketRecordsActivity activity) {
+    public MarketRecordAdapter(int layoutResId, List<Order> data, MarketRecordsActivity activity) {
         super(layoutResId, data);
         this.activity = activity;
         marketOrderDataManager = MarketOrderDataManager.getInstance(this.activity);

@@ -10,7 +10,6 @@ import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Utf8String;
 import org.web3j.abi.datatypes.generated.Uint8;
 import org.web3j.protocol.Web3j;
-import org.web3j.protocol.Web3jFactory;
 import org.web3j.protocol.core.DefaultBlockParameterName;
 import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthCall;
@@ -27,7 +26,7 @@ public class Erc20Service {
     public Erc20Service() {
         String ethBase = SDK.ethBase();
         HttpService httpService = new HttpService(ethBase);
-        web3j = Web3jFactory.build(httpService);
+        web3j = Web3j.build(httpService);
     }
 
     public Observable<EthCall> getBindAddress(String owner, int projectId) {

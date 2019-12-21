@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -71,7 +71,7 @@ public class AuthorityWebPresenter extends BasePresenter<AuthorityWebActivity> {
 
     public void showPasswordDialog() {
         if (passwordDialog == null) {
-            final AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);
+            final AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);
             View passwordView = LayoutInflater.from(context).inflate(R.layout.dialog_put_password, null);
             builder.setView(passwordView);
             final EditText passwordInput = passwordView.findViewById(R.id.password_input);

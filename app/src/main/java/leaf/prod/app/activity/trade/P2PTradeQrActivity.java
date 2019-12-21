@@ -2,7 +2,7 @@ package leaf.prod.app.activity.trade;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.ConstraintLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 

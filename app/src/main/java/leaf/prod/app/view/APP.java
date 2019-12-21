@@ -11,7 +11,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.CallSuper;
 import android.support.multidex.MultiDex;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.Config;

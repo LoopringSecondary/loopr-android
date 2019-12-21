@@ -5,7 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.common.base.Joiner;
 import com.vondear.rxtool.view.RxToast;

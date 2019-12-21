@@ -15,7 +15,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -186,7 +186,7 @@ public class ConvertPresenter extends BasePresenter<ConvertActivity> {
      */
     public void showFeeDialog() {
         if (feeDialog == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);//
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);//
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_fee, null);
             builder.setView(view);
             tvAmount = view.findViewById(R.id.tv_amount);
@@ -246,7 +246,7 @@ public class ConvertPresenter extends BasePresenter<ConvertActivity> {
      */
     public void showPasswordDialog() {
         if (passwordDialog == null) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);//
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);//
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_put_password, null);
             builder.setView(view);
             final EditText passwordInput = view.findViewById(R.id.password_input);

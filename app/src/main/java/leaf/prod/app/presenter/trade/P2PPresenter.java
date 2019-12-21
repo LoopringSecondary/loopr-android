@@ -1,9 +1,9 @@
 package leaf.prod.app.presenter.trade;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.core.app.Fragment;
+import androidx.core.app.FragmentManager;
+import androidx.core.app.FragmentTransaction;
 
 import butterknife.ButterKnife;
 import leaf.prod.app.R;

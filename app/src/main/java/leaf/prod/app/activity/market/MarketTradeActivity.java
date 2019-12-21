@@ -11,8 +11,8 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.core.app.Fragment;
+import androidx.core.view.ViewPager;
 import android.view.WindowManager;
 
 import butterknife.BindView;

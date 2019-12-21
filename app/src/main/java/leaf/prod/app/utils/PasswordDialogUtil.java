@@ -5,7 +5,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -30,7 +30,7 @@ public class PasswordDialogUtil {
     public static void showPasswordDialog(Context context, String tag, View.OnClickListener listener) {
         Context existContext = contextMap.get(passwordTag = tag);
         if (existContext == null || ((Activity) existContext).isFinishing()) {
-            final android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context, R.style.DialogTheme);
+            final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context, R.style.DialogTheme);
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_put_password, null);
             builder.setView(view);
             view.findViewById(R.id.password_input);
